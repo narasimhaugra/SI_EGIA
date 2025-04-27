@@ -1,0 +1,2038 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="5.1.0" links="1">
+ <!--${qpc}-->
+ <framework name="qpc"/>
+ <!--${AOs}-->
+ <package name="AOs" stereotype="0x02">
+  <!--${AOs::Handle}-->
+  <class name="Handle" superclass="qpc::QActive">
+   <!--${AOs::Handle::Timer}-->
+   <attribute name="Timer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::IdleTimer}-->
+   <attribute name="IdleTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::SleepTimer}-->
+   <attribute name="SleepTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::MotorsOK}-->
+   <attribute name="MotorsOK" type="uint8_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::MotorsChecked}-->
+   <attribute name="MotorsChecked" type="uint8_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::Handle}-->
+   <attribute name="Handle" type="HANDLE" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::Clamshell}-->
+   <attribute name="Clamshell" type="CLAMSHELL" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::Adapter}-->
+   <attribute name="Adapter" type="ADAPTER" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::Reload}-->
+   <attribute name="Reload" type="RELOAD" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::Cartridge}-->
+   <attribute name="Cartridge" type="CARTRIDGE" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::FaultTimer}-->
+   <attribute name="FaultTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::DeferQueue}-->
+   <attribute name="DeferQueue" type="QEQueue" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::BatteryLowTimer}-->
+   <attribute name="BatteryLowTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::IdleModeTimer}-->
+   <attribute name="IdleModeTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::PrevStateUSB}-->
+   <attribute name="PrevStateUSB" type="uint8_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::BatChgrCntCycle}-->
+   <attribute name="BatChgrCntCycle" type="uint16_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::ActiveFaultsInfo}-->
+   <attribute name="ActiveFaultsInfo" type="FAULT_INFO" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::MotorIdleTimer}-->
+   <attribute name="MotorIdleTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::RotationConfigScreenTimer}-->
+   <attribute name="RotationConfigScreenTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::CountDownScreenTimer}-->
+   <attribute name="CountDownScreenTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::RotationConfigTimer}-->
+   <attribute name="RotationConfigTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::ReloadSwitchTimer}-->
+   <attribute name="ReloadSwitchTimer" type="QTimeEvt" visibility="0x00" properties="0x00">
+    <documentation>This timer is used to periodically get the adapter switch state. A reload connected will be a switch closed state.</documentation>
+   </attribute>
+   <!--${AOs::Handle::EgiaReload}-->
+   <attribute name="EgiaReload" type="RELOAD" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::WaitFor1WireReload}-->
+   <attribute name="WaitFor1WireReload" type="bool" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::OnChargerTimetoSleep}-->
+   <attribute name="OnChargerTimetoSleep" type="uint32_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::pChargerInfo}-->
+   <attribute name="pChargerInfo" type="CHARGER_INFO*" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::RetryFireCountUpdateTimer}-->
+   <attribute name="RetryFireCountUpdateTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::FiringTimer}-->
+   <attribute name="FiringTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::ReqRstScreenInfo}-->
+   <attribute name="ReqRstScreenInfo" type="REQRST_SCREENINFO" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::DisplayAlternateScreen}-->
+   <attribute name="DisplayAlternateScreen" type="bool" visibility="0x00" properties="0x00">
+    <documentation>/// Display alternate screen</documentation>
+   </attribute>
+   <!--${AOs::Handle::IsInsuffBatteryToneAlreadyPlayed}-->
+   <attribute name="IsInsuffBatteryToneAlreadyPlayed" type="bool" visibility="0x00" properties="0x00">
+    <documentation>/// Insufficient battery tone already played when set</documentation>
+   </attribute>
+   <!--${AOs::Handle::KeySide}-->
+   <attribute name="KeySide" type="uint8_t" visibility="0x00" properties="0x00">
+    <documentation>/// Key side (left or right)</documentation>
+   </attribute>
+   <!--${AOs::Handle::IsKeySideRotationDisabled}-->
+   <attribute name="IsKeySideRotationDisabled" type="bool" visibility="0x00" properties="0x00">
+    <documentation>/// Rotation configuration enabled/disabled</documentation>
+   </attribute>
+   <!--${AOs::Handle::KeyState}-->
+   <attribute name="KeyState" type="uint16_t" visibility="0x00" properties="0x00">
+    <documentation>///Key Press/Release State</documentation>
+   </attribute>
+   <!--${AOs::Handle::HandleRemainingProcedures}-->
+   <attribute name="HandleRemainingProcedures" type="uint16_t" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::ClamshellOWShortTimer}-->
+   <attribute name="ClamshellOWShortTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::HandleProcFireCountTestFailed}-->
+   <attribute name="HandleProcFireCountTestFailed" type="bool" visibility="0x00" properties="0x00">
+    <documentation>/// Flag to check Handle Procedure and Firing count Test Pass or fail</documentation>
+   </attribute>
+   <!--${AOs::Handle::WaitforBHTimer}-->
+   <attribute name="WaitforBHTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::LowBatteryTriggered}-->
+   <attribute name="LowBatteryTriggered" type="bool" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::InsufficientBatteryTriggered}-->
+   <attribute name="InsufficientBatteryTriggered" type="bool" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::ShutdownBatteryTriggered}-->
+   <attribute name="ShutdownBatteryTriggered" type="bool" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::AdapterCheckTimer}-->
+   <attribute name="AdapterCheckTimer" type="QTimeEvt" visibility="0x00" properties="0x00"/>
+   <!--${AOs::Handle::SM}-->
+   <statechart properties="0x01">
+    <documentation>uint8_t BatteryLevel;</documentation>
+    <!--${AOs::Handle::SM::initial}-->
+    <initial target="../1/41">
+     <action brief="Startup">// Handle object initializations
+//
+// Create timer attribute
+// Initialize Adapter, Clamshell, Reload, Cartridge conditions
+
+AO_Subscribe(AO_Handle, P_ADAPTER_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_ADAPTER_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_CLAMSHELL_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_CLAMSHELL_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_RELOAD_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_RELOAD_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_EGIA_RELOAD_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_EGIA_RELOAD_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_CARTRIDGE_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_CARTRIDGE_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_MOTOR_0_STOP_INFO_SIG);
+AO_Subscribe(AO_Handle, P_MOTOR_1_STOP_INFO_SIG);
+AO_Subscribe(AO_Handle, P_MOTOR_2_STOP_INFO_SIG);
+AO_Subscribe(AO_Handle, P_KEYPRESS_SIG);
+AO_Subscribe(AO_Handle, P_MOVEMENT_SIG);
+AO_Subscribe(AO_Handle, P_USED_SHELL_SIG);
+AO_Subscribe(AO_Handle, P_ERR_SHELL_SIG);
+AO_Subscribe(AO_Handle, P_ERR_BATT_LOW_SIG);
+AO_Subscribe(AO_Handle, P_BATTERY_LEVEL_INSUFF_SIG);
+AO_Subscribe(AO_Handle, P_BATT_COMM_SIG);
+AO_Subscribe(AO_Handle, P_BATT_SHUTDN_SIG);
+AO_Subscribe(AO_Handle, P_ERRBAT_DISABLED_SIG);
+AO_Subscribe(AO_Handle, P_HANDLE_EOL_SIG);
+AO_Subscribe(AO_Handle, P_PERM_FAIL_WOP_SIG);
+AO_Subscribe(AO_Handle, P_PERM_FAIL_SIG);
+AO_Subscribe(AO_Handle, P_REQ_RST_SIG);
+AO_Subscribe(AO_Handle, P_UNSUPPORTED_ADAPTER_SIG);
+AO_Subscribe(AO_Handle, P_ADAPTER_ERROR_SIG);
+AO_Subscribe(AO_Handle, P_ERRFILE_SYS_SIG);
+AO_Subscribe(AO_Handle, P_ACCELERR_SIG);
+AO_Subscribe(AO_Handle, P_USB_CONNECTED_SIG);
+AO_Subscribe(AO_Handle, P_USB_REMOVED_SIG);
+AO_Subscribe(AO_Handle, P_MOTOR_IDLE_SIG);
+AO_Subscribe(AO_Handle, P_MOTOR_MOVING_SIG);
+AO_Subscribe(AO_Handle, P_SHIPMODE_REQ_SIG);
+AO_Subscribe(AO_Handle, P_ROTATION_CONFIG_PRESS_SIG);
+AO_Subscribe(AO_Handle, P_ROTATION_CONFIG_RELEASE_SIG);
+AO_Subscribe(AO_Handle, P_ROTATION_DEACTIVATED_SIG);
+AO_Subscribe(AO_Handle, P_ROTATION_CONFIG_COMPLETED_SIG);
+AO_Subscribe(AO_Handle, P_ONCHARGER_WAKEFROMSLEEP_SIG);
+AO_Subscribe(AO_Handle, P_SYSTEM_FAULT_SIG);
+AO_Subscribe(AO_Handle, P_SDCARD_ERROR_SIG);
+AO_Subscribe(AO_Handle, P_HANDLE_MEM_SIG);
+AO_Subscribe(AO_Handle, P_ERROR_OWSHORT_NO_DEVICE_SIG);
+
+/// \todo 9/26/2021 - SE Below signals will be removed once KeyPattern is Updated
+AO_Subscribe(AO_Handle, P_LATERAL_RIGHT_UP_PRESS_SIG);
+AO_Subscribe(AO_Handle, P_LATERAL_RIGHT_UP_RELEASE_SIG);
+AO_Subscribe(AO_Handle, P_LATERAL_LEFT_UP_PRESS_SIG);
+AO_Subscribe(AO_Handle, P_LATERAL_LEFT_UP_RELEASE_SIG);
+AO_Subscribe(AO_Handle, P_BATT_TEMP_SIG);
+AO_Subscribe(AO_Handle, P_HANDLE_FIRE_PROCEDURE_COUNT_TEST_SIG);
+AO_Subscribe(AO_Handle, P_ADAPTER_COM_RESP_RECEIVED_SIG);
+AO_Subscribe(AO_Handle, P_ADAPTER_COM_RETRY_FAIL_SIG);
+
+
+me-&gt;Handle.Status = AM_DEVICE_DISCONNECTED;
+me-&gt;Adapter.Status = AM_DEVICE_DISCONNECTED;
+me-&gt;Adapter.DevID = DEVICE_ID_UNKNOWN;
+me-&gt;Clamshell.Status = AM_DEVICE_DISCONNECTED;
+
+Signia_AccelEnable(true, 0, HNutil_ProcessAccelEvents);
+Signia_ChargerManagerSetChargeLimits(100, 93);
+Signia_ChargerManagerRegEventHandler(HNutil_ProcessChargerEvents, 10000);
+me-&gt;pChargerInfo = Signia_ChargerManagerGetChargerInfo();
+me-&gt;HandleProcFireCountTestFailed = false;
+// Hook into adapter detection callback
+//Signia_AdapterManagerRegisterHandler(AdapterMgrCallback);
+
+/* Raise StartUp Error Events */
+Signia_StartupErrorEventPublish();  //  temporary placeholder? - merge with faulthandler once finalized?
+</action>
+     <initial_glyph conn="56,4,5,0,11,7">
+      <action box="0,-2,9,2"/>
+     </initial_glyph>
+    </initial>
+    <!--${AOs::Handle::SM::Operate}-->
+    <state name="Operate">
+     <documentation>// Top level state.
+//
+// WARNING: This state name is accessed
+//          by external routines. Be sure
+//          to update all instances if
+//          renaming.</documentation>
+     <!--${AOs::Handle::SM::Operate::IDLE_TIMEOUT}-->
+     <tran trig="IDLE_TIMEOUT">
+      <action>// Idle timeout - Go into standby mode
+do
+{
+    Signia_PowerModeSet(POWER_MODE_STANDBY);
+    Log(DEV, &quot;Transition: Idle-&gt;Standby&quot;);
+
+    // Start Sleep timer if Clamshell is not Connected
+    if (AM_DEVICE_DISCONNECTED == me-&gt;Clamshell.Status)
+    {
+        AO_TimerArm(&amp;me-&gt;SleepTimer, IDLE_TIME_TO_SLEEP, 0);
+    }
+} while (false);</action>
+      <tran_glyph conn="4,35,3,-1,24">
+       <action box="0,-2,15,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ADAPTER_REMOVED}-->
+     <tran trig="P_ADAPTER_REMOVED" target="../37">
+      <action>// Indicate adapter disconnected
+QEVENT_FAULT *pSignalEvent;
+SIGNAL CurrentSig;
+HNutil_ProcessDeviceConnEvents(me, e);
+
+AO_TimerRearm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER);
+// Update display as required
+
+// Stop all motors
+Signia_MotorStop(MOTOR_ID0);
+Signia_MotorStop(MOTOR_ID1);
+Signia_MotorStop(MOTOR_ID2);
+L3_GpioCtrlClearSignal(GPIO_GN_LED);
+me-&gt;Adapter.ConnectorBusShort = false;
+if(me-&gt;Clamshell.ClamshellBusShort)
+{              
+    CurrentSig = P_ERR_SHELL_SIG;
+    pSignalEvent = AO_EvtNew(CurrentSig, sizeof(QEVENT_FAULT));
+    pSignalEvent-&gt;ErrorCause = ERR_CLAMSHELL_ONEWIRE_SHORT;
+    pSignalEvent-&gt;ErrorStatus = true;
+    AO_Publish(pSignalEvent, NULL);
+}
+else if (me-&gt;Handle.HandleBusShort) 
+{
+    CurrentSig = P_PERM_FAIL_SIG;
+    pSignalEvent = AO_EvtNew(CurrentSig, sizeof(QEVENT_FAULT));
+    pSignalEvent-&gt;ErrorCause = ERR_PERMANENT_FAIL_ONEWIRE_SHORT;
+    pSignalEvent-&gt;ErrorStatus = true;
+    AO_Publish(pSignalEvent, NULL);
+}
+InitAppHandler();
+</action>
+      <tran_glyph conn="4,87,3,3,38">
+       <action box="0,-2,19,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_CLAMSHELL_REMOVED}-->
+     <tran trig="P_CLAMSHELL_REMOVED" target="../37">
+      <action>
+uint8_t BatteryLevel;     /* Variable to Hold the Current battery level*/
+
+Signia_ChargerManagerGetBattRsoc(&amp;BatteryLevel);
+
+me-&gt;ActiveFaultsInfo.IsErrShell = false;
+
+// Indicate Clamshell disconnected
+HNutil_ProcessDeviceConnEvents(me, e);
+// Check without CLAMSHELL attached is in the ST_ERR_BATT_INSUFF state.
+if(BatteryLevel &lt;= BATTERY_LIMIT_INSUFFICIENT)
+{
+    AO_TimerArm(&amp;me-&gt;FaultTimer, BATT_INSUFF_WITHOUT_CS_TIMEOUT, 0);
+}
+else if(BatteryLevel &lt;= BATTERY_LIMIT_LOW)
+{
+    AO_TimerArm(&amp;me-&gt;BatteryLowTimer, BATT_LOW_WITHOUT_CS_TIMEOUT, 0);
+}
+else
+{
+    CompatAdapterScreenDuration = ADAPT_COMPAT_SCREEN_DUR_RUNTIME;
+}</action>
+      <tran_glyph conn="4,89,3,3,38">
+       <action box="0,-2,21,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_RELOAD_REMOVED, P_CARTRIDGE_RE~}-->
+     <tran trig="P_RELOAD_REMOVED, P_CARTRIDGE_REMOVED">
+      <action>// Indicate reload/cartridge disconnected
+HNutil_ProcessDeviceConnEvents(me, e);</action>
+      <tran_glyph conn="4,55,3,-1,24">
+       <action box="0,-4,21,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_CARTRIDGE_CONNECTED}-->
+     <tran trig="P_CARTRIDGE_CONNECTED">
+      <action>HNutil_ProcessDeviceConnEvents(me, e);</action>
+      <tran_glyph conn="4,49,3,-1,24">
+       <action box="0,-2,24,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_RELOAD_CONNECTED}-->
+     <tran trig="P_RELOAD_CONNECTED">
+      <action>HNutil_ProcessDeviceConnEvents(me, e);
+
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+Signia_PowerModeSet(POWER_MODE_ACTIVE);
+/// \todo 11/03/2021 NP-Handle to transition to Clamp test only when calibration is completed
+//status_ = Q_TRAN(EGIA_Clamptest_Full_Close);
+
+/// \todo 11/16/2021 NP- Whoever published RELOAD_CONNECTED_SIG should have done authentication &amp; included results in the event. 
+/// \todo 11/16/2021 NP- In that case, HNutil_ProcessDeviceConnEvents should take care of updating authentication status as well.
+// me-&gt;ReloadAuth needs to be set.
+// Determine what to do if not authentic/used
+// Also save data area here for future use
+// \todo - Any display updates here?
+
+if ( me-&gt;ActiveFaultsInfo.IsPermFailWop )
+{
+    // Reload Connected when PERMFAIL WOP is active
+    Signia_PlayTone(SNDMGR_TONE_FAULT);
+}</action>
+      <tran_glyph conn="4,47,3,-1,24">
+       <action box="0,-2,22,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATTERY_INFO}-->
+     <tran trig="P_BATTERY_INFO">
+      <action>QEVENT_CHARGER *pInfo = (QEVENT_CHARGER *)e;
+bool ReloadConnected;
+LOG_BATT_INFO(pInfo);
+
+if ((BATT_TEMP_HI_LIMIT &lt; pInfo-&gt;Info.BatteryTemperature) || (BATT_TEMP_LO_LIMIT &gt; pInfo-&gt;Info.BatteryTemperature))
+{
+    /// \todo 12/02/2021 BS - System Reaction to Battery temperature out of limit to be defined?
+    Log(DBG, &quot;Battery Temperature out of Limits&quot;);
+}
+
+
+/* Check if Reload connected - Battery error status is updated based on Reload Connection status */
+if ( (AM_DEVICE_CONNECTED == me-&gt;Reload.Status) ||
+    (AM_DEVICE_CONNECTED == me-&gt;EgiaReload.Status) )
+{
+    ReloadConnected = true;
+}
+else
+{
+    ReloadConnected = false;
+}
+/* Check Battery Voltage Low, Insufficient or Shutdown Errors */
+Signia_BatteryUpdateErrors(&amp;pInfo-&gt;Info, me, ReloadConnected);
+</action>
+      <tran_glyph conn="4,22,3,-1,24">
+       <action box="0,-2,16,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ON_CHARGER}-->
+     <tran trig="P_ON_CHARGER" target="../44">
+      <action>me-&gt;OnChargerTimetoSleep = ONCHARGER_TIMETOFIRSTSLEEP;
+Signia_BatteryHealthCheckReset();
+
+///\todo: 3/14/2022 BS- check TCA flag, if set Reset BQchip
+</action>
+      <tran_glyph conn="193,13,1,1,-49">
+       <action box="-16,-2,14,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_SHIPMODE_REQ}-->
+     <tran trig="P_SHIPMODE_REQ">
+      <!--${AOs::Handle::SM::Operate::P_SHIPMODE_REQ::[Status_OK]}-->
+      <choice target="../../42">
+       <guard brief="Status_OK">AM_DEVICE_CONNECTED != me-&gt;Adapter.Status</guard>
+       <action>/* Allow entry into ship mode when Adapter is not connected */
+Log(TRC, &quot;Handle is powering down (entering ship mode) &quot;);
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+Signia_PlayTone(SNDMGR_TONE_SHUTDOWN);
+OSTimeDly(SEC_3);   //Allow Shutdown  tone (~2sec) to play and log messages
+Signia_PowerModeSet(POWER_MODE_SHIP);  /// \\todo 03/09/2022 KIA: will log message be written before handle powers down?</action>
+       <choice_glyph conn="176,18,5,1,-13">
+        <action box="-10,-2,10,2"/>
+       </choice_glyph>
+      </choice>
+      <!--${AOs::Handle::SM::Operate::P_SHIPMODE_REQ::[Status_FAIL]}-->
+      <choice>
+       <guard brief="Status_FAIL">else</guard>
+       <action>/* Disallow entry into shipmode when Adapter is connected */
+Log(REQ,&quot;Disallowed entry into SHIP MODE, Reason: Adapter Connected&quot;);</action>
+       <choice_glyph conn="176,18,4,-1,-2,-11">
+        <action box="-10,-4,10,2"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="193,18,1,-1,-17">
+       <action box="-16,-2,17,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::SLEEP_TIMEOUT}-->
+     <tran trig="SLEEP_TIMEOUT">
+      <action>// NOTE: This event does NOT transition to sleep so that
+//       control will return to the currently active state
+//       if Signia_PowerModeSet fails.
+
+if (!me-&gt;Handle.HandleComConnected)
+{
+    Log(DEV, &quot;Standby idle, entering Sleep Mode&quot;);
+    Signia_PowerModeSet(POWER_MODE_SLEEP);
+}
+ </action>
+      <tran_glyph conn="193,44,1,-1,-18">
+       <action box="-16,-2,15,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate:: P_CLAMSHELL_CONNECTED, P_ADAPTE~}-->
+     <tran trig=" P_CLAMSHELL_CONNECTED, P_ADAPTER_CONNECTED">
+      <action>uint8_t BatteryLevel;
+
+Signia_ChargerManagerGetBattRsoc(&amp;BatteryLevel);
+do
+{
+    /* Clamshell or Adapter connected */
+    HNutil_ProcessDeviceConnEvents(me, e);    // Process Signia Device connection as appropriate
+    if ( P_CLAMSHELL_CONNECTED_SIG == e-&gt;sig &amp;&amp; me-&gt;ActiveFaultsInfo.IsPermFailWop )
+    {
+        // Clamshell Connected when PERMFAIL WOP is active
+        Signia_PlayTone(SNDMGR_TONE_FAULT);
+    }
+
+
+    // Play Battery Tones
+    if (BatteryLevel &lt;= BATTERY_LIMIT_INSUFFICIENT)
+    {
+        Signia_PlayTone(SNDMGR_TONE_INSUFFICIENT_BATTERY);
+        InsuffBattery = true;
+    }
+    else if (BatteryLevel &lt;= BATTERY_LIMIT_LOW)
+    {
+        Signia_PlayTone(SNDMGR_TONE_LOW_BATTERY);
+        LowBattery = true;
+    }
+    else
+    {
+        // Do nothing
+    }
+
+    BREAK_IF (CHRG_MNGR_STATE_DISCONNECTED != Signia_ChargerManagerGetState())
+    BREAK_IF ((AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status) &amp;&amp; (AM_DEVICE_DISCONNECTED == me-&gt;Adapter.Status))
+
+    if (AM_DEVICE_CONNECTED == me-&gt;Adapter.Status)
+    {
+        Signia_PowerModeSet(POWER_MODE_ACTIVE); 
+        AO_TimerRearm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER);
+        break;
+    }
+}
+while (false);</action>
+      <tran_glyph conn="4,40,3,-1,24">
+       <action box="0,-4,23,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_KEYPRESS, P_MOVEMENT}-->
+     <tran trig="P_KEYPRESS, P_MOVEMENT">
+      <action>QEVENT_KEY *pKeyEvents;
+pKeyEvents = (QEVENT_KEY *)e;
+
+/* Disarm any active timers */
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+
+if (P_KEYPRESS_SIG == e-&gt;sig)
+{
+    /* Read Key State */
+    me-&gt;KeyState = pKeyEvents-&gt;KeyState;
+}
+
+/* User Action - Set timeout to IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER when either Adapter or Clamshell are connected */
+if ((AM_DEVICE_CONNECTED == me-&gt;Adapter.Status) || (AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status))
+{
+    AO_TimerArm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER,0);
+    /* Set power mode to Active  */
+    Signia_PowerModeSet(POWER_MODE_ACTIVE);
+}
+else /* Only Handle */
+{
+    if (P_KEYPRESS_SIG == e-&gt;sig)
+    {
+        /* Set power mode to Active  */
+        Signia_PowerModeSet(POWER_MODE_ACTIVE);
+    }
+    // Keypress activity, Show Compatible Adapter Screen Ref: Platform SRS ID# 295441
+    if ((P_KEYPRESS_SIG == e-&gt;sig) &amp;&amp; (KEY_STATE_PRESS == pKeyEvents-&gt;State))
+    {
+        // Display PROCEDURE_COMPAT_ADAPT_SCREEN
+        Show_AdapterCompatibleScreen(me-&gt;HandleRemainingProcedures);
+    }
+
+        // Keyrelease activity, Show Insert Clamshell Screen Ref: Platform SRS ID# 295441
+    if ((P_KEYPRESS_SIG == e-&gt;sig) &amp;&amp; (!pKeyEvents-&gt;KeyState))
+    {
+            // Display INSERT_CLAMSHELL_SCREEN Animation Screen
+            Show_InsertClamshellScreen();
+    }
+
+    /* TimerArm - making this oneshot timer */
+    AO_TimerArm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_NO_CLAMSHELL,0);
+    AO_TimerArm(&amp;me-&gt;SleepTimer, IDLE_TIME_TO_SLEEP,0);
+}</action>
+      <tran_glyph conn="4,45,3,-1,19">
+       <action box="0,-4,13,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATTERY_LEVEL_INSUFF, FAULT_TI~}-->
+     <tran trig="P_BATTERY_LEVEL_INSUFF, FAULT_TIMEOUT">
+      <action> uint8_t BatteryLevel;     /* Variable to Hold the Current battery level*/
+
+Signia_ChargerManagerGetBattRsoc(&amp;BatteryLevel);
+/* Play tone and log only once entering MOO_ERR_BATT_INSUFF */
+if (!InsuffBattery)
+{
+    Log(REQ, &quot;Entered MOO_ERR_BATT_INSUFF&quot;);
+    Signia_PlayTone(SNDMGR_TONE_INSUFFICIENT_BATTERY);
+    InsuffBattery = true;
+}
+
+/* To show alternative screens */
+DisplayAlternateScreen = !DisplayAlternateScreen;
+/* HANDLE without CLAMSHELL attached is in the MOO_ERR_BATT_INSUFF condition */
+if ( (AM_DEVICE_CONNECTED != me-&gt;Clamshell.Status) &amp;&amp;
+     (BatteryLevel &lt;= BATTERY_LIMIT_INSUFFICIENT) )
+{
+    /* Battery level Insufficient and No Clamshell prasent */
+    Gui_AlterInsuffBattNoClamshell_Screen();
+    /* Start timer to alternate screens */
+    AO_TimerArm(&amp;me-&gt;FaultTimer, BATT_INSUFF_WITHOUT_CS_TIMEOUT, 0);
+}</action>
+      <tran_glyph conn="4,16,3,-1,24">
+       <action box="0,-4,25,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATT_COMM}-->
+     <tran trig="P_BATT_COMM" target="../40">
+      <action>/* Play Error Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+/* Display Battery Connection Error Screen */
+Gui_BattConnectionErr_Screen();
+/* Update Heart Beat Led On Off Time to 5 seconds*/
+HNutil_UpdateHeartBeatPeriod(e);</action>
+      <tran_glyph conn="193,53,1,1,-41">
+       <action box="-16,-2,16,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_USED_SHELL}-->
+     <tran trig="P_USED_SHELL">
+      <action>me-&gt;Clamshell.ClamshellEOL = true;
+// Display USED_CS_SCREEN
+Gui_Used_CS_Screen();
+
+/* Play Caution Tone */
+Signia_PlayTone(SNDMGR_TONE_CAUTION);
+
+Log(DBG, &quot;USED_CS_SCREEN - Used Clamshell Connected&quot;);
+</action>
+      <tran_glyph conn="4,61,3,-1,24">
+       <action box="0,-2,15,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ERR_SHELL}-->
+     <tran trig="P_ERR_SHELL">
+      <action>// Play the TONE_ERR_FAULT tone and show Clamshell Error screen
+QEVENT_FAULT *pClamshellErr;
+pClamshellErr = (QEVENT_FAULT *)e;
+
+do
+{
+
+    /*  Monitor the CLAMSHELL 1_WIRE_BUS for shorts when a CLAMSHELL is connected without an ADAPTER.*/
+    if ((AM_DEVICE_DISCONNECTED == me-&gt;Adapter.Status) &amp;&amp; (AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status))
+    {
+        Log(DEV, &quot;Clamshell onewire Short detected&quot;);
+    }
+
+    if (ERR_CLAMSHELL_ONEWIRE_SHORT ==  pClamshellErr-&gt;ErrorCause)
+    {
+        //then run the timer of 2 sec to enter into sleep mode
+        if (AM_DEVICE_CONNECTED == me-&gt;Adapter.Status)
+        {
+            me-&gt;Clamshell.ClamshellBusShort = true;
+            break;
+        }
+        else
+        {
+            AO_TimerArm(&amp;me-&gt;ClamshellOWShortTimer, CLAMSHELL_ONEWIRE_SHORT_TIMEOUT, 0);
+        }
+    }
+    else
+    {
+        me-&gt;ActiveFaultsInfo.IsErrShell = true;
+    }
+
+    Log(DBG,&quot;***** Entering Clamshell Error State *****&quot;);
+    Signia_PlayTone(SNDMGR_TONE_FAULT);
+    Gui_InsertClamshellErrorScreen(); 
+}while (false);</action>
+      <tran_glyph conn="4,63,3,-1,24">
+       <action box="0,-2,14,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATTERY_LOW,  P_ERR_BATT_LOW}-->
+     <tran trig="P_BATTERY_LOW,  P_ERR_BATT_LOW">
+      <action>QEVENT_CHARGER *pInfo = (QEVENT_CHARGER *)e;
+
+LOG_BATT_INFO(pInfo);
+
+/* Log an event Low Battery status */
+Log(DEV, &quot;Entered ERR_BATT_LOW state &quot;);</action>
+      <tran_glyph conn="4,27,3,-1,24">
+       <action box="0,-4,22,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::BATTERY_LOW_TIMEOUT}-->
+     <tran trig="BATTERY_LOW_TIMEOUT">
+      <action>/* Play tone only once enter into P_ST_ERR_BATT_LOW_SIG state */
+
+if (!LowBattery)
+{
+    /* Play Low Battery Tone only once in ST_ERR_BATT_LOW state */
+    Signia_PlayTone(SNDMGR_TONE_LOW_BATTERY);
+    LowBattery = true;
+}
+
+/* Display Battery Low Battery Screens based on the clamshell status */
+if (AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status)
+{
+    // Log Low Battery Event
+    Log(DBG, &quot;LOW_BATTERY_SCREEN - Clamshell Connected&quot;);
+}
+else /* Clamshell is not connected */
+{
+    DisplayAlternateScreen = !DisplayAlternateScreen;
+    /* Display  alternately LOW_BATT_PR1_COMPAT_ADAPT_SCREEN and LOW_BATT_PR2_SCREEN */
+    Gui_AlterLowBattNoClamshell_Screen(me-&gt;HandleRemainingProcedures);
+    /* Start timer to alternate screens */
+    AO_TimerArm(&amp;me-&gt;BatteryLowTimer, BATT_LOW_WITHOUT_CS_TIMEOUT, 0);
+}</action>
+      <tran_glyph conn="4,32,3,-1,24">
+       <action box="0,-2,20,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ERRBAT_DISABLED}-->
+     <tran trig="P_ERRBAT_DISABLED">
+      <action>Log(DBG, &quot;Battery Fault Signal Received&quot;);
+Signia_BatDisableFault();
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+AO_TimerDisarm(&amp;me-&gt;Timer);
+Signia_KeypadScanPause();</action>
+      <tran_glyph conn="4,19,3,-1,24">
+       <action box="0,-2,24,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_HANDLE_EOL}-->
+     <tran trig="P_HANDLE_EOL" target="../40">
+      <action>/* Play Error Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+/* Display Battery End of Life Screen */
+Gui_HandleEndOfLife_Screen();
+/* Update Heart Beat Led On Off Time to 5 seconds*/
+HNutil_UpdateHeartBeatPeriod(e);</action>
+      <tran_glyph conn="193,49,1,1,-41">
+       <action box="-16,-2,13,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_PERM_FAIL_WOP}-->
+     <tran trig="P_PERM_FAIL_WOP">
+      <action>Gui_HandleErrorScreen();
+/* Play Error Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+/* Update HeartBeat Led with 2 seconds on, 2 seconds off*/
+HNutil_UpdateHeartBeatPeriod(e);
+/* Permanent Failure WOP is active */
+me-&gt;ActiveFaultsInfo.IsPermFailWop = true;
+</action>
+      <tran_glyph conn="193,46,1,-1,-18">
+       <action box="-16,-2,15,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_REQ_RST, P_SYSTEM_FAULT}-->
+     <tran trig="P_REQ_RST, P_SYSTEM_FAULT" target="../40">
+      <action>POWER_MODE PowerMode;
+AO_TimerDisarm(&amp;me-&gt;FaultTimer);  // Time will be reset by HNutil_DisplayRequestScreenSeq // ReqScreeenTimer?
+/* Play Error Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+/* Update HeartBeat Led with 3 seconds on, 3 seconds off*/
+HNutil_UpdateHeartBeatPeriod(e);
+
+me-&gt;ReqRstScreenInfo.ReqRstSeq       = REQRSTSCREEN_SEQA;
+me-&gt;ReqRstScreenInfo.ReqRstScreen    = REQRST_SCREEN_ONE;
+me-&gt;ReqRstScreenInfo.ScreenDispCount = 0;
+
+PowerMode = Signia_PowerModeGet();
+if ( POWER_MODE_STANDBY == PowerMode )
+{
+    Signia_PowerModeSet (POWER_MODE_ACTIVE);
+}
+
+HNutil_DisplayRequestScreenSeq(me);  // This function sets fault timer.</action>
+      <tran_glyph conn="193,57,1,1,-41">
+       <action box="-16,0,15,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ERRFILE_SYS, P_ACCELERR}-->
+     <tran trig="P_ERRFILE_SYS, P_ACCELERR">
+      <action>if ( P_ERRFILE_SYS_SIG == e-&gt;sig )
+{
+    me-&gt;ActiveFaultsInfo.IsFileSysErr = true;
+}
+else
+{
+    me-&gt;ActiveFaultsInfo.IsAccelErr = true;
+}
+</action>
+      <tran_glyph conn="4,71,3,-1,24">
+       <action box="0,-4,21,4"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATT_SHUTDN}-->
+     <tran trig="P_BATT_SHUTDN" target="../42">
+      <action>/// \todo 01092022 KIA: disable USB. Need API to disable USB
+Log(TRC, &quot;Powering Down&quot;);
+/* Set power mode to active to play tones and gui*/
+Signia_PowerModeSet(POWER_MODE_ACTIVE);
+Signia_KeypadScanPause();
+Signia_PlayTone(SNDMGR_TONE_INSUFFICIENT_BATTERY);
+Gui_DepletedBatt_Screen();
+OSTimeDly(SEC_5); // time for tone and display to playout
+Signia_PlayTone(SNDMGR_TONE_INSUFFICIENT_BATTERY);
+OSTimeDly(SEC_1); // time for tone to playout
+Signia_PowerModeSet(POWER_MODE_SHUTDOWN);</action>
+      <tran_glyph conn="193,20,1,1,-30">
+       <action box="-16,-2,16,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_MOTOR_IDLE}-->
+     <tran trig="P_MOTOR_IDLE">
+      <action>/// \todo 02/09/2022 DAZ - Should we do all this in platform? Is it even needed anymore?
+
+// Timeout every 4 hours as long as motor isn't running.
+
+Log(DEV, &quot;All Motors off, battery level %.1f%%&quot;, me-&gt;pChargerInfo-&gt;BatteryLevel);
+AO_TimerArm(&amp;me-&gt;MotorIdleTimer, HOUR_4, HOUR_4);</action>
+      <tran_glyph conn="4,98,3,-1,24">
+       <action box="0,-2,18,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::MOTOR_IDLE_TIMEOUT}-->
+     <tran trig="MOTOR_IDLE_TIMEOUT">
+      <action>if ( me-&gt;pChargerInfo-&gt;BatteryLevel &gt; BATTERY_LIMIT_LOW )
+{
+    // NOTE: This timeout provides a current pulse
+    //       for every 4 hours of motor inactivity
+    //       by enabling the Allegro chips for 2 seconds. This
+    //       current pulse causes the BQ chip to perform a
+    //       recalibrate operation.
+
+    Log(DEV, &quot;Motor Idle timeout - Enable Motor&quot;);
+
+    Signia_MotorEnable(MOTOR_ID0);
+    Signia_MotorEnable(MOTOR_ID1);
+    Signia_MotorEnable(MOTOR_ID2);
+
+    // This event intentionally blocks for 2 seconds
+    // in order to ignore keystrokes that may occur
+    // during this time. Any keystrokes that DO occur
+    // will be processed after this event has been processed.
+
+    OSTimeDly(SEC_2);
+
+    Log(DEV, &quot;Motor Idle timeout - Disable Motor&quot;);
+    Signia_MotorDisable(MOTOR_ID0);
+    Signia_MotorDisable(MOTOR_ID1);
+    Signia_MotorDisable(MOTOR_ID2);
+}</action>
+      <tran_glyph conn="4,104,3,-1,24">
+       <action box="0,-2,19,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_MOTOR_MOVING}-->
+     <tran trig="P_MOTOR_MOVING">
+      <action>AO_TimerDisarm(&amp;me-&gt;MotorIdleTimer);</action>
+      <tran_glyph conn="4,109,3,-1,24">
+       <action box="0,-2,19,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_BATT_TEMP}-->
+     <tran trig="P_BATT_TEMP">
+      <action>QEVENT_FAULT *pSignalEvent;
+pSignalEvent = (QEVENT_FAULT *)e;
+/* Battery Temperature Out of Range */
+do
+{
+    /* Battery Temperature Error Set */
+    if ( pSignalEvent-&gt;ErrorStatus )
+    {
+        Log(REQ,&quot;Entered Battery Temperature Error State&quot;);
+        /* Display Battery Connection Error Screen */
+        Gui_BattConnectionErr_Screen();
+        /* Play Error Tone */
+        Signia_PlayTone(SNDMGR_TONE_FAULT);
+        /* Set Battery Temperature Error */
+        me-&gt;ActiveFaultsInfo.BattTempError = true;
+    }
+    else
+    {
+        /* Battery Temperatur Error Cleared */
+        Gui_BattConnectionErr_ScreenUnlock();
+        /* Clear Battery Temperature Error */
+        me-&gt;ActiveFaultsInfo.BattTempError = false;
+    }
+
+}while(false);
+</action>
+      <tran_glyph conn="4,113,3,-1,24">
+       <action box="0,-2,10,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_SDCARD_ERROR}-->
+     <tran trig="P_SDCARD_ERROR">
+      <action>QEVENT_FAULT *pSignalEvent;
+
+pSignalEvent = (QEVENT_FAULT *)e;
+
+if ( SDCARD_NOTPRESENT == pSignalEvent-&gt;ErrorCause )
+{
+    /* SD CARD NOT PRESENT */
+    Log(REQ, &quot;ERROR: SD CARD NOT PRESENT&quot;);
+}
+else
+{
+    /* Handle other causes */
+}</action>
+      <tran_glyph conn="193,64,1,-1,-17">
+       <action box="-15,-2,16,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_PERM_FAIL}-->
+     <tran trig="P_PERM_FAIL">
+      <action>QEVENT_FAULT *pHandleErr;
+pHandleErr = (QEVENT_FAULT *)e;
+do
+{
+    /* Transition if ErrorStatus is set, else remain in operate */
+    if (ERR_PERMANENT_FAIL_ONEWIRE_SHORT == pHandleErr-&gt;ErrorCause)
+    {
+        /* If Adapter Connected and Handle Bus short happens then set flag */
+        if (AM_DEVICE_CONNECTED == me-&gt;Adapter.Status)
+        {
+            me-&gt;Handle.HandleBusShort = true;
+            break;
+        }
+    }
+    Log(DBG,&quot;**** Entering Permanent Error State ****&quot;);
+    /* Display HANDLE_ERROR_SCREEN */
+    Gui_HandleErrorScreen();
+
+    /* Play Error Tone */
+    Signia_PlayTone(SNDMGR_TONE_FAULT);
+
+    /* Update HeartBeat Led with 2 seconds on, 2 seconds off*/
+    HNutil_UpdateHeartBeatPeriod(e);
+}while (false);</action>
+      <!--${AOs::Handle::SM::Operate::P_PERM_FAIL::[!me->Handle.HandleBusShort]}-->
+      <choice target="../../40">
+       <guard>!me-&gt;Handle.HandleBusShort</guard>
+       <choice_glyph conn="179,68,5,1,-27">
+        <action box="1,0,10,2"/>
+       </choice_glyph>
+      </choice>
+      <!--${AOs::Handle::SM::Operate::P_PERM_FAIL::[else]}-->
+      <choice>
+       <guard>else</guard>
+       <choice_glyph conn="179,68,4,-1,5">
+        <action box="0,2,10,2"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="193,68,1,-1,-14">
+       <action box="-12,-2,10,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::CLAMSHELL_1WSHORT_TIMEOUT}-->
+     <tran trig="CLAMSHELL_1WSHORT_TIMEOUT">
+      <action>Signia_PowerModeSet(POWER_MODE_SLEEP);</action>
+      <tran_glyph conn="4,66,3,-1,24">
+       <action box="0,-2,22,3"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ERROR_OWSHORT_NO_DEVICE}-->
+     <tran trig="P_ERROR_OWSHORT_NO_DEVICE">
+      <action>/* No Device on Bus and Short Happened */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+Log(DEV, &quot;Clamshell/Connector Bus short without device on bus&quot;);
+Signia_PowerModeSet(POWER_MODE_SLEEP);
+
+</action>
+      <tran_glyph conn="4,77,3,-1,24">
+       <action box="0,-2,26,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_USB_CONNECTED}-->
+     <tran trig="P_USB_CONNECTED">
+      <action>AO_TimerDisarm(&amp;me-&gt;SleepTimer);  // Disable sleep while on USB</action>
+      <tran_glyph conn="193,74,1,-1,-15">
+       <action box="-18,-2,17,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_USB_REMOVED}-->
+     <tran trig="P_USB_REMOVED">
+      <action>/* The HANDLE shall transition from STANDBY_MODE to SLEEP_MODE 
+from 2 minutes  to 7 minutes from loss of USB communication */
+if (AM_DEVICE_DISCONNECTED == me-&gt;Clamshell.Status)
+{
+    AO_TimerRearm(&amp;me-&gt;SleepTimer, IDLE_TIME_TO_SLEEP);
+}
+me-&gt;Handle.HandleComConnected = false;</action>
+      <tran_glyph conn="193,76,1,-1,-15">
+       <action box="-17,-2,16,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_HANDLE_FIRE_PROCEDURE_COUNT_TE~}-->
+     <tran trig="P_HANDLE_FIRE_PROCEDURE_COUNT_TEST">
+      <action>/* Handle Procedure / Fire Count test failed */
+/* Play Fault Tone */
+me-&gt;HandleProcFireCountTestFailed = true;
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+/// \todo 01/20/2023 BS - Below screen not working (screen stuck). need to be fixed, for now commenting
+//Gui_HandleErrorScreen();
+Log(DBG, &quot;Handle Procedure/Fire Count Test Failed&quot;);</action>
+      <tran_glyph conn="193,89,1,-1,-17">
+       <action box="-18,0,10,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ADAPTER_COM_RESP_RECEIVED}-->
+     <tran trig="P_ADAPTER_COM_RESP_RECEIVED">
+      <action>QEVENT_ADAPTERCOM *pSignalEvent;
+
+pSignalEvent = (QEVENT_ADAPTERCOM *)e;
+if(ADAPTER_GET_TYPE == pSignalEvent-&gt;AdapterCmd)
+{
+    if(!me-&gt;Adapter.Authenticated)
+    {
+        me-&gt;Adapter.DevID = (DEVICE_ID_ENUM)Signia_GetUartAdapterType();//use UART adapter type
+    }
+}</action>
+      <tran_glyph conn="193,114,1,-1,-21">
+       <action box="-29,-2,27,3"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::P_ADAPTER_COM_RETRY_FAIL}-->
+     <tran trig="P_ADAPTER_COM_RETRY_FAIL">
+      <action>QEVENT_ADAPTERCOM *pSignalEvent;
+
+pSignalEvent = (QEVENT_ADAPTERCOM *)e;
+
+me-&gt;Adapter.Status= AM_DEVICE_ACCESS_FAIL;
+if(ADAPTER_UPDATE_MAIN == pSignalEvent-&gt;AdapterCmd)
+{
+    Gui_AdapterErrorScreen();
+    Signia_PlayTone(SNDMGR_TONE_FAULT);
+      /// \todo 08/feb/2022 JA use this to generate a FW upgrade fail signal to retract the
+      ///FIRING_ROD to the load position and prevent ARTICULATION CALIBRATION
+      /// requirement SIGNIASR-1630 ID:317051
+
+}</action>
+      <tran_glyph conn="193,117,1,-1,-19">
+       <action box="-29,-2,26,2"/>
+      </tran_glyph>
+     </tran>
+     <!--${AOs::Handle::SM::Operate::Idle}-->
+     <state name="Idle">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Idle state
+ *
+ * \details This state waits for a valid adapter/clamshell to be attached, and transitions to 
+ *          the appropriate state for application processing.
+ *
+ * ========================================================================== */</documentation>
+      <entry>/**
+ * \warning The RETRY_TIMEOUT signal is borrowed in this state insure that the adapter connected test is
+ *          invoked when the state is entered. This is done to handle the case where a clamshell and
+ *          adapter have already been detected. In this case, there will be no adapter/clamshell connected
+ *          events to invoke this processing.
+ */
+uint8_t             BatteryLevel;  // Variable used to read the current battery level
+AM_HANDLE_IF        *pHandle;
+
+Log(DEV, &quot;Handle - Idle state entered&quot;);
+
+Signia_ChargerManagerGetBattRsoc(&amp;BatteryLevel);
+
+// Disable the Accelerometer until clamshell is detected
+Signia_AccelEnable(false, 0, NULL);
+
+// Let Handle be completely active
+Signia_PowerModeSet(POWER_MODE_ACTIVE);
+
+// Check for Com status. This is required if USB is connected on startup, we are missing the P_USB_CONNECTED_SIG
+me-&gt;Handle.HandleComConnected = L4_CommStatusActive();
+
+// Get handle Information
+pHandle = HandleGetIF();
+me-&gt;HandleRemainingProcedures = ((pHandle-&gt;Data.ProcedureLimit) - (pHandle-&gt;Data.ProcedureCount));
+
+AO_TimerDisarm(&amp;me-&gt;Timer);           // Stop the timer restart it after the showing screen.
+AO_TimerDisarm(&amp;me-&gt;FaultTimer);      // Stop the FaultTimer restart
+AO_TimerDisarm(&amp;me-&gt;BatteryLowTimer); // Stop the BatteryLowTimer restart
+
+if( (AM_DEVICE_CONNECTED != me-&gt;Clamshell.Status) &amp;&amp;
+    (BatteryLevel &lt;= BATTERY_LIMIT_INSUFFICIENT))
+{
+    AO_TimerArm(&amp;me-&gt;FaultTimer, BATT_INSUFF_WITHOUT_CS_TIMEOUT, 0);
+}
+
+// Battery level &lt;= LOW and Clamshell not connected.
+// Alternately display the LOW_BATT_PR2_SCREEN and LOW_BATT_PR1_COMPAT_ADAPT_SCREEN
+else if( (AM_DEVICE_CONNECTED != me-&gt;Clamshell.Status) &amp;&amp; (BatteryLevel &lt;= BATTERY_LIMIT_LOW))
+{
+    AO_TimerArm(&amp;me-&gt;BatteryLowTimer, BATT_LOW_WITHOUT_CS_TIMEOUT, 0);
+}
+
+// Battery level above LOW and Clamshell not connected.
+// Show Insert Clamshell screen
+else if((AM_DEVICE_CONNECTED != me-&gt;Clamshell.Status) &amp;&amp; (BatteryLevel &gt; BATTERY_LIMIT_LOW))
+{
+    // Show Adapter compatible screen and display usage count as well
+    Show_AdapterCompatibleScreen(me-&gt;HandleRemainingProcedures);
+
+    // Start screen show duration timer, on expiry will switch to idle state
+    AO_TimerRearm(&amp;me-&gt;Timer, CompatAdapterScreenDuration);
+}
+
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+AO_TimerArm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_NO_CLAMSHELL, 0);
+
+// A fake timeout signal is posted here in the event that the adapter and clamshell are already attached
+// when we get here. The timeout signal forces the initial Adapter/Clamshell present check.
+if ((AM_DEVICE_CONNECTED == me-&gt;Adapter.Status) || (AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status))
+{
+    AO_Post(AO_Handle, &amp;RetryTimeoutSig, NULL);    // Post dummy signal to force initial Clamshell/Adapter check.
+}
+</entry>
+      <!--${AOs::Handle::SM::Operate::Idle::TIMEOUT}-->
+      <tran trig="TIMEOUT">
+       <action>// Show Appropriate Screens
+AO_TimerDisarm(&amp;me-&gt;Timer);
+
+if (AM_DEVICE_DISCONNECTED == me-&gt;Clamshell.Status)
+{
+    if (!L4_DmScreenUnlockTemp_New())
+    {
+        L4_DmCurrentScreenLockUnLock_New(SCREEN_LOCK_OFF);
+        Show_InsertClamshellScreen();
+    }
+}
+else if (AM_DEVICE_DISCONNECTED == me-&gt;Adapter.Status)
+{
+    // Show Adapter Screen only if Clamshell is Unused and not in Error state
+    if ( (!me-&gt;Clamshell.ClamshellEOL) &amp;&amp; (!me-&gt;ActiveFaultsInfo.IsErrShell))
+    {
+        /* Unlock the screen if screen locked temperary */
+        if (!L4_DmScreenUnlockTemp_New())
+        {
+            L4_DmCurrentScreenLockUnLock_New(SCREEN_LOCK_OFF);
+            Show_AdapterRequestScreen(me-&gt;HandleRemainingProcedures);
+        }
+    }
+}
+</action>
+       <tran_glyph conn="42,109,3,-1,32">
+        <action box="0,-2,10,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_UNSUPPORTED_ADAPTER}-->
+      <tran trig="P_UNSUPPORTED_ADAPTER">
+       <action>Log(DEV, &quot;Unsupported Adapter: Adapter is not an EGIA&quot;);
+
+//Show Unsupported Adapter Screen
+Gui_AdapterUnsupported();
+
+/* Play Fault Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);</action>
+       <tran_glyph conn="42,101,3,-1,32">
+        <action box="0,-2,24,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_ADAPTER_ERROR}-->
+      <tran trig="P_ADAPTER_ERROR">
+       <action>Log(DEV, &quot;Adapter Error: Authentication Fail/CRC Fail/BusError/1-WireShort detected&quot;);
+//Show Adapter Error screen
+Gui_AdapterErrorScreen();
+/* Play Fault Tone */
+Signia_PlayTone(SNDMGR_TONE_FAULT);
+</action>
+       <tran_glyph conn="42,105,3,-1,32">
+        <action box="0,-2,17,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::COUNTDOWN_SCREEN_TIMEOUT}-->
+      <tran trig="COUNTDOWN_SCREEN_TIMEOUT">
+       <action>/* Update the Rotation Count Down Activation/Deactivation screens for every one second */
+HNutil_RotationConfigDisplayCountDownScreens(me);</action>
+       <tran_glyph conn="42,113,3,-1,32">
+        <action box="0,-2,30,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::ROTATION_CONFIG_SCREEN_TIMEOUT}-->
+      <tran trig="ROTATION_CONFIG_SCREEN_TIMEOUT">
+       <action>/* Display Previous Screen */
+/// \todo 9/26/2021 SE call display previous screen API once it is available
+</action>
+       <tran_glyph conn="42,117,3,-1,32">
+        <action box="0,-2,32,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_ROTATION_DEACTIVATED}-->
+      <tran trig="P_ROTATION_DEACTIVATED">
+       <action>/* Display Rotation Activation Screens based on the Side */
+    if(me-&gt;KeySide == KEY_SIDE_LEFT)
+    {
+        //Gui_RB_ActivateIndicatorL_ScreenSet();
+        Gui_RotateActivateLeft_ScreenSet();
+    }
+    else
+    {
+        //Gui_RB_ActivateIndicatorR_ScreenSet();
+        Gui_RotateActivateRight_ScreenSet();
+    }
+
+/* Start 2 seconds Timer */
+AO_TimerArm(&amp;me-&gt;RotationConfigScreenTimer, ROTATION_CONFIG_2SEC_TIMEOUT, NULL); </action>
+       <tran_glyph conn="42,121,3,-1,32">
+        <action box="0,-2,31,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_ROTATION_CONFIG_COMPLETED}-->
+      <tran trig="P_ROTATION_CONFIG_COMPLETED">
+       <action>/* Stop  Count Down Screen Timer */
+AO_TimerDisarm(&amp;me-&gt;CountDownScreenTimer);
+
+/* Display Rotation Configuration Screens based on Activation/Deactivation */
+if(me-&gt;IsKeySideRotationDisabled == false)
+{
+    /* Display Rotation Deactivation Screens based on the Side */
+    if(me-&gt;KeySide == KEY_SIDE_LEFT)
+    {
+        Gui_RotateDeactLeft_ScreenSet();
+    }
+    else
+    {
+        Gui_RotateDeactRight_ScreenSet();
+    }
+}
+else
+{
+    /* Display Rotation Activation Count Down 1 Screens based on the Side */
+    if(me-&gt;KeySide == KEY_SIDE_LEFT)
+    {
+        Gui_RotationACtivatedLeft_ScreenSet();
+    }
+    else
+    {
+        Gui_RotationACtivatedRight_ScreenSet();
+    }
+}
+
+/* Start 2 seconds Timer to display Activated / Deactivated Screen */
+AO_TimerArm(&amp;me-&gt;RotationConfigScreenTimer, ROTATION_CONFIG_2SEC_TIMEOUT, NULL);
+
+//Update the status of rotation configuration for the side
+Signia_UpdateRotationConfigStatus(me-&gt;KeySide);</action>
+       <tran_glyph conn="42,125,3,-1,32">
+        <action box="0,-2,29,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_ROTATION_CONFIG_PRESS, P_LATER~}-->
+      <tran trig="P_ROTATION_CONFIG_PRESS, P_LATERAL_RIGHT_UP_PRESS, P_LATERAL_LEFT_UP_PRESS">
+       <action>/// \todo 9/26/2021 SE Remove P_LATERAL_RIGHT_UP_PRESS and P_LATERAL_LEFT_UP_PRESS Signals once Rotation Key Pattern updates are available
+/// \todo 5/26/2022 CPK Remove FIX_ROTATION_CONFIG  once Rotation Key Pattern updates are available
+#ifdef FIX_ROTATION_CONFIG
+do
+{
+    if(me-&gt;ActiveFaultsInfo.IsErrShell || me-&gt;Clamshell.ClamshellEOL)
+    {
+        Log(DEV, &quot;Handle - Ignore Rotation Configuration req&quot;);
+        Log(DEV, &quot;IsErrShell = %d, IsUsedClamshell = %d&quot;, me-&gt;ActiveFaultsInfo.IsErrShell, me-&gt;Clamshell.ClamshellEOL);
+        break;
+    }
+
+    // Check if both side keys are enabled, display both enabled screen
+    if( !Signia_GetRotationConfigStatus(KEY_SIDE_LEFT) &amp;&amp; !Signia_GetRotationConfigStatus(KEY_SIDE_RIGHT) )
+    {
+       // Display ROTATION_ACTIVATED_BOTH_SCREEN
+       Log(DEV, &quot;Handle - Display Both Side Rotation Activated screen&quot;);
+       Gui_RotationActivatedBoth_ScreenSet();
+    }
+
+    pRotKeyEvent = (QEVENT_KEY *)e;
+    me-&gt;KeySide = pRotKeyEvent-&gt;KeySide;
+    me-&gt;IsKeySideRotationDisabled = Signia_GetRotationConfigStatus(me-&gt;KeySide);
+
+    /* Start 3 second Rotation Config Timer */
+    AO_TimerArm(&amp;me-&gt;RotationConfigTimer, ROTATION_CONFIG_TIMEOUT, NULL);
+
+    HNutil_RotationConfigDisplayCountDownScreens(me);
+
+    /* Start one second Periodic Timer to display Count down Display Screens */
+    AO_TimerArm(&amp;me-&gt;CountDownScreenTimer, ROTATION_CONFIG_SCREEN_COUNTDOWNTIME, ROTATION_CONFIG_SCREEN_COUNTDOWNTIME);
+} while(false);
+#endif
+</action>
+       <tran_glyph conn="42,133,3,-1,32">
+        <action box="0,-6,26,6"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::P_ROTATION_CONFIG_RELEASE, P_LAT~}-->
+      <tran trig="P_ROTATION_CONFIG_RELEASE, P_LATERAL_RIGHT_UP_RELEASE, P_LATERAL_LEFT_UP_RELEASE">
+       <action>/// \todo 9/26/2021 SE Remove P_LATERAL_RIGHT_UP_RELEASE and P_LATERAL_LEFT_UP_RELEASE Signals once Rotation Key Pattern updates are available
+/* Disarm All the timers */
+AO_TimerDisarm(&amp;me-&gt;RotationConfigScreenTimer);
+AO_TimerDisarm(&amp;me-&gt;CountDownScreenTimer);
+AO_TimerDisarm(&amp;me-&gt;RotationConfigTimer);
+/* Display Previous Screen */
+/// todo SE 21-Sept-21 call display previous screen API once it is available
+/// As of now calling  AdapterCalib  for testing
+//L4_DmShowScreen(&amp;ScreenAdapterCalib);</action>
+       <tran_glyph conn="42,143,3,-1,32">
+        <action box="0,-6,26,6"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::RETRY_TIMEOUT, P_ADAPTER_CONNECT~}-->
+      <tran trig="RETRY_TIMEOUT, P_ADAPTER_CONNECTED, P_CLAMSHELL_CONNECTED">
+       <action>// Process adapter or clamshell as
+// approproate. Update display as
+// required.
+HNutil_ProcessDeviceConnEvents(me, e);
+Signia_PowerModeSet(POWER_MODE_ACTIVE);
+Signia_StartRotationConfigPatternWatch();
+
+if ( (AM_DEVICE_CONNECTED == me-&gt;Adapter.Status) || (AM_DEVICE_ACCESS_FAIL == me-&gt;Adapter.Status) )
+{
+    // Standby and Sleep mode area disabled when an adapter is connected/1-wire read failed
+    //   Hence disable standby and sleep timers
+    AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+
+    // Enable idle timer of 15min, if adapter not used for that 15min after connection,
+    // handle will go to Standby Mode
+    AO_TimerRearm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER);
+}
+else
+{
+    if (AM_DEVICE_CONNECTED == me-&gt;Clamshell.Status)
+    {
+        if(me-&gt;Clamshell.ClamshellBusShort)
+        {
+            //Clamshell Shorted
+            Gui_InsertClamshellErrorScreen();
+            me-&gt;Clamshell.ClamshellBusShort = false; 
+        }
+        else if ((me-&gt;Clamshell.ClamshellEOL) &amp;&amp; (!L4_DmScreenUnlockTemp_New()))
+        {                   
+            // Display USED_CS_SCREEN and Screen Lock is temporary
+            Gui_Used_CS_Screen();
+        }
+        else if (me-&gt;ActiveFaultsInfo.IsErrShell)
+        {
+            // Display HANDLE_CS_ERR_SCREEN
+            Gui_InsertClamshellErrorScreen();
+        }
+        else
+        {
+            /* REQUEST_ADAPTER_SCREEN after a detected CLAMSHELL is authenticated, not used,
+               and an ADAPTER is not attached - wait for adapter detection before screen display */
+            AO_TimerRearm(&amp;me-&gt;Timer, ADAPT_REQUEST_SCREEN_DUR);
+        }
+
+        AO_TimerRearm(&amp;me-&gt;IdleTimer, IDLE_TIME_BEFORE_STANDBY_WITH_CSHELL_ADAPTER);
+        AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+    }
+}
+
+if ( me-&gt;ActiveFaultsInfo.IsPermFailWop )
+{
+    // Clamshell/Adapter Connected when PERMFAIL WOP is active
+    Signia_PlayTone(SNDMGR_TONE_FAULT);
+}
+if (me-&gt;Adapter.AdapterUnsupported)
+{
+    FaultHandlerSetFault(UNSUPPORTED_ADAPTER_DETECTED, SET_ERROR);
+}</action>
+       <!--${AOs::Handle::SM::Operate::Idle::RETRY_TIMEOUT, P~::[Unsupported]}-->
+       <choice>
+        <guard brief="Unsupported">else</guard>
+        <choice_glyph conn="50,88,4,-1,6,7">
+         <action box="0,4,10,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::Idle::RETRY_TIMEOUT, P~::[Supported]}-->
+       <choice target="../../10">
+        <guard brief="Supported">((me-&gt;Adapter.Status != AM_DEVICE_DISCONNECTED) &amp;&amp; (!me-&gt;Adapter.AdapterUnsupported))</guard>
+        <action>/// \todo 1/23/2023 BS: clampshell not detected by adapter detected, show the screen accordingly</action>
+        <choice_glyph conn="50,88,5,3,11">
+         <action box="1,-2,12,2"/>
+        </choice_glyph>
+       </choice>
+       <tran_glyph conn="42,80,3,-1,8,8">
+        <action box="0,-4,47,4"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck}-->
+      <state name="AdapterTypeCheck">
+       <documentation>/* ========================================================================== */
+/**
+ * \brief   AdapterTypeCheck state
+ *
+ * \details This state checks for Adapter Type. if the type
+ *          is already known from Onewire we continue, else 
+ *	 if we wait to read the Adapter Type from Adpater   	 *           Flash to continue
+ *
+ * ========================================================================== */</documentation>
+       <entry>AO_TimerArm(&amp;me-&gt;AdapterCheckTimer, 10,0);</entry>
+       <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHECK_TIMEOUT}-->
+       <tran trig="ADAPTER_TYPE_CHECK_TIMEOUT">
+        <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHE~::[AdapterKnown]}-->
+        <choice>
+         <guard brief="AdapterKnown">(DEVICE_ID_UNKNOWN != me-&gt;Adapter.DevID ) &amp;&amp; !(me-&gt;Adapter.pHandle-&gt;pIsAdapComInProgress())</guard>
+         <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHE~::[AdapterKnown]::[EGIA]}-->
+         <choice target="../../../../../43/2">
+          <guard brief="EGIA">DEVICE_ID_ADAPTER_EGIA == me-&gt;Adapter.DevID</guard>
+          <action>if ((AM_DEVICE_ACCESS_FAIL == me-&gt;Adapter.Status) || \
+    (AM_DEVICE_AUTH_FAIL == me-&gt;Adapter.Status))
+{
+    //1-wire authentication failed, move to EGIA operate just for emergency retraction
+    //disable all key inputs here
+    Signia_KeypadScanPause();
+}
+// Valid EGIA adapter found, transition
+// to external EGIA substate
+
+// The If statement below is included to avoid 
+// compiler warning about unreachable code
+
+if (me)
+{
+    status_ = Q_TRAN(EGIA_Operate);    // Transition to external EGIA superstate
+    break;
+}</action>
+          <choice_glyph conn="82,87,5,0,72,4">
+           <action box="1,-2,10,2"/>
+          </choice_glyph>
+         </choice>
+         <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHE~::[AdapterKnown]::[EEA]}-->
+         <choice target="../../../../../43/1">
+          <guard brief="EEA">DEVICE_ID_ADAPTER_EEA == me-&gt;Adapter.DevID</guard>
+          <action>// Valid EGIA adapter found, transition
+// to external EEA substate
+
+// The If statement below is included to avoid 
+// compiler warning about unreachable code
+
+if (me)
+{
+    status_ = Q_TRAN(EEA_Operate);    // Transition to external EEA superstate
+    break;
+}</action>
+          <choice_glyph conn="82,87,4,0,2,41,2">
+           <action box="1,0,10,2"/>
+          </choice_glyph>
+         </choice>
+         <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHE~::[AdapterKnown]::[UNKN]}-->
+         <choice>
+          <guard brief="UNKN">else</guard>
+          <action>// Unsupported adapter
+// Update display as required</action>
+          <choice_glyph conn="82,87,4,-1,6,7">
+           <action box="1,4,8,2"/>
+          </choice_glyph>
+         </choice>
+         <choice_glyph conn="78,90,4,-1,-3,4">
+          <action box="-9,-5,11,2"/>
+         </choice_glyph>
+        </choice>
+        <!--${AOs::Handle::SM::Operate::Idle::AdapterTypeCheck::ADAPTER_TYPE_CHE~::[else]}-->
+        <choice>
+         <guard>else</guard>
+         <action>AO_TimerRearm(&amp;me-&gt;AdapterCheckTimer, 10);</action>
+         <choice_glyph conn="78,90,4,-1,5,2">
+          <action box="-2,5,6,2"/>
+         </choice_glyph>
+        </choice>
+        <tran_glyph conn="61,90,3,-1,17">
+         <action box="0,-2,15,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="61,82,30,16">
+        <entry box="1,2,6,2"/>
+       </state_glyph>
+      </state>
+      <state_glyph node="42,71,50,74">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::Banner}-->
+     <state name="Banner">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Display startup banner
+ *
+ * \details This state initiates the display of the startup banner and maintains
+ *          it for a set time before moving on th the next state.
+ *
+ * ========================================================================== */</documentation>
+      <entry brief="Startup_Banner">Log(DEV, &quot;Handle - Startup banner display&quot;);         
+
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+
+AO_TimerRearm(&amp;me-&gt;Timer, BANNER_DISPLAY_TIME);  
+WelcomeScreenShow(PLATFORM_VERSION);  
+
+HNutil_SystemClockUpdate();</entry>
+      <!--${AOs::Handle::SM::Operate::Banner::TIMEOUT}-->
+      <tran trig="TIMEOUT">
+       <action>Log(DEV, &quot;Handle - Startup banner display complete&quot;);  /// \todo - Remove after test
+</action>
+       <!--${AOs::Handle::SM::Operate::Banner::TIMEOUT::[AdapterON]}-->
+       <choice target="../../../37">
+        <guard brief="Adapter ON">(AM_DEVICE_CONNECTED == me-&gt;Adapter.Status)</guard>
+        <action>// If an adapter is already connected, skip the motor test.</action>
+        <choice_glyph conn="76,37,5,1,24,38,-8">
+         <action box="1,-2,16,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::Banner::TIMEOUT::[AdapterOFF]}-->
+       <choice target="../../../39">
+        <guard brief="AdapterOFF">else</guard>
+        <action>// No adapter found - start motor test</action>
+        <choice_glyph conn="76,37,4,1,2,20,12,-4">
+         <action box="1,0,10,2"/>
+        </choice_glyph>
+       </choice>
+       <tran_glyph conn="42,37,3,-1,34">
+        <action box="0,-2,10,2"/>
+       </tran_glyph>
+      </tran>
+      <state_glyph node="42,29,50,16">
+       <entry box="1,2,15,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::MotorTest}-->
+     <state name="MotorTest">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Perform motor test
+ *
+ * \details This state moves each motor a specified amount and tests for successful
+ *          completion. If the motor test passes, the appropriate display / sound
+ *          is issued and control passes to the idle state. If the motor test fails,
+ *          the appropriate displays/sounds are issued, and control is transferred
+ *          to the fault state.
+ *
+ * ========================================================================== */</documentation>
+      <entry brief="Motor_Test">me-&gt;MotorsOK = 0;        // Initialize test maps
+me-&gt;MotorsChecked = 0;
+
+Log(DEV, &quot;Handle - Motor test start&quot;);  /// \todo - Remove when real display in
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);      // Give test time to run
+HNutil_StartMotorTest(me, e);               // Start moving all motors</entry>
+      <exit brief="Motor_Stop">// All motors off</exit>
+      <!--${AOs::Handle::SM::Operate::MotorTest::P_MOTOR_0_STOP_INFO, P_MOTOR_1_S~}-->
+      <tran trig="P_MOTOR_0_STOP_INFO, P_MOTOR_1_STOP_INFO, P_MOTOR_2_STOP_INFO">
+       <action>QEVENT_MOTOR_STOP_INFO *pStop;
+
+pStop = (QEVENT_MOTOR_STOP_INFO *)e;    // Cast event pointer to proper format
+
+Log(DBG, &quot;Handle - Motor %d stop signal received&quot;, pStop-&gt;MotorNum);
+
+me-&gt;MotorsChecked |= (1 &lt;&lt; pStop-&gt;MotorNum);  // Mark motor N as stopped
+if(pStop-&gt;StopStatus &amp; MOT_STOP_STATUS_IN_POS)
+{
+me-&gt;MotorsOK |= (1 &lt;&lt; pStop-&gt;MotorNum);       // Mark motor N as OK
+}</action>
+       <!--${AOs::Handle::SM::Operate::MotorTest::P_MOTOR_0_STOP_I~::[TestFail]}-->
+       <choice>
+        <guard brief="TestFail">(me-&gt;MotorsChecked == 7) &amp;&amp; 
+(me-&gt;MotorsOK != 7)</guard>
+        <action>Log(DEV, &quot;Handle - Motor test failed&quot;);
+
+// Create Fault for Motor Test Fail
+FaultHandlerSetFault(REQRST_MOTOR_TEST, SET_ERROR);
+</action>
+        <choice_glyph conn="78,61,4,-1,-2,12">
+         <action box="1,-4,10,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::MotorTest::P_MOTOR_0_STOP_I~::[TestOK]}-->
+       <choice target="../../../37">
+        <guard brief="TestOK">(me-&gt;MotorsChecked == 7) &amp;&amp; 
+(me-&gt;MotorsOK == 7)</guard>
+        <action>Log(DEV, &quot;Handle - Motor test OK&quot;);
+AO_TimerDisarm(&amp;me-&gt;Timer);
+Signia_PlayTone(SNDMGR_TONE_ALL_GOOD);    // Test passed - Play all good tone</action>
+        <choice_glyph conn="78,61,5,1,18,12,-4">
+         <action box="1,-2,10,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::MotorTest::P_MOTOR_0_STOP_I~::[Testing]}-->
+       <choice>
+        <guard brief="Testing">else</guard>
+        <choice_glyph conn="78,61,4,-1,2,10">
+         <action box="1,0,11,2"/>
+        </choice_glyph>
+       </choice>
+       <tran_glyph conn="42,61,3,-1,36">
+        <action box="0,-6,20,6"/>
+       </tran_glyph>
+      </tran>
+      <state_glyph node="42,49,50,18">
+       <entry box="1,2,11,2"/>
+       <exit box="1,4,11,3"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::Fault}-->
+     <state name="Fault">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Hard fault
+ *
+ * \details An unrecoverable error has occurred. Remain in this state until the unit
+ *          is restarted.
+ *
+ * ========================================================================== */</documentation>
+      <entry>Log(DEV, &quot;Handle - Enter Fault State&quot;);  /// \todo DAZ - Remove after demo
+
+
+</entry>
+      <!--${AOs::Handle::SM::Operate::Fault::CATCH_ALL}-->
+      <tran trig="CATCH_ALL">
+       <action>// Do not respond to any signals until restart</action>
+       <tran_glyph conn="110,57,3,-1,22">
+        <action box="0,-2,12,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Fault::P_ON_CHARGER}-->
+      <tran trig="P_ON_CHARGER" target="../../44">
+       <action>me-&gt;OnChargerTimetoSleep = ONCHARGER_TIMETOFIRSTSLEEP;
+Signia_BatteryHealthCheckReset();
+
+///\todo: 3/14/2022 BS- check TCA flag, if set Reset BQchip
+</action>
+       <tran_glyph conn="110,55,3,2,30,-16">
+        <action box="0,-2,14,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Fault::P_ADAPTER_CONNECTED, P_CLAMSHELL~}-->
+      <tran trig="P_ADAPTER_CONNECTED, P_CLAMSHELL_CONNECTED, P_RELOAD_CONNECTED">
+       <action>/* Enable one wire on Adapter */
+HNutil_ProcessDeviceConnEvents(me, e);
+
+/* Clamshell/Adapter/Reload Connected: Play Error Tone*/
+Signia_PlayTone(SNDMGR_TONE_FAULT);</action>
+       <tran_glyph conn="110,67,3,-1,22">
+        <action box="0,-6,23,6"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Fault::FAULT_TIMEOUT}-->
+      <tran trig="FAULT_TIMEOUT">
+       <action>/* Display Reset screens*/
+HNutil_DisplayRequestScreenSeq(me);</action>
+       <tran_glyph conn="110,59,3,-1,22">
+        <action box="0,-2,14,2"/>
+       </tran_glyph>
+      </tran>
+      <state_glyph node="110,47,42,24">
+       <entry box="1,2,5,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::Startup}-->
+     <state name="Startup">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Initial transition termination
+ *
+ * \details This state provides a termination of the initialization task context.
+ *          It sets a short timer event and returns to the caller. When the timer
+ *          expires, this state runs in the AO's context instead of the initilization
+ *          task's context. The timeout then transfers to the rest of the application.
+ *          All future events are processed in the AO's context.
+ * 
+ *          This workaround is not required if it is acceptable to execute the
+ *          entry code of the top level state in the initialization task's context
+ *          on initialization.
+ * 
+ * \note    These parameters are common to all states, so they are only shown here.
+ * 
+ * \param   me - Pointer to AO's local data structure. (This includes the AO descriptor)
+ * \param   e  - Pointer to event
+ *
+ * \return  State status
+ *
+ * ========================================================================== */
+</documentation>
+      <entry brief="Startup">Log(DEV, &quot;Handle App starting&quot;);
+AO_TimerArm(&amp;me-&gt;Timer, 1, 0);
+AO_TimerDisarm(&amp;me-&gt;IdleTimer);</entry>
+      <!--${AOs::Handle::SM::Operate::Startup::TIMEOUT}-->
+      <tran trig="TIMEOUT">
+       <action>AO_TimerDisarm(&amp;me-&gt;Timer);</action>
+       <!--${AOs::Handle::SM::Operate::Startup::TIMEOUT::[OnCharger]}-->
+       <choice target="../../../44">
+        <guard brief="OnCharger">(CHRG_MNGR_STATE_CONNECTED == Signia_ChargerManagerGetState())</guard>
+        <action>// This test is performed here in the event that
+// the P_ON_CHARGER event was published before
+// Handle could subscribe to it. All future instances
+// are handled by the P_ON_CHARGER event.</action>
+        <choice_glyph conn="56,19,5,3,40,-5,15">
+         <action box="1,-2,10,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::Startup::TIMEOUT::[OffCharger]}-->
+       <choice target="../../../38">
+        <guard brief="OffCharger">(CHRG_MNGR_STATE_CONNECTED != Signia_ChargerManagerGetState())</guard>
+        <choice_glyph conn="56,19,4,1,2,40,10,-4">
+         <action box="1,0,10,2"/>
+        </choice_glyph>
+       </choice>
+       <tran_glyph conn="42,19,3,-1,14">
+        <action box="0,-2,10,2"/>
+       </tran_glyph>
+      </tran>
+      <state_glyph node="42,11,50,14">
+       <entry box="1,2,15,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::PowerDown}-->
+     <state name="PowerDown">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Power down the handle (ship mode)
+ *
+ * \details Power to the handle is removed. Power may only be restored by
+ *          inserting the handle into the charger. At that point, the processor
+ *          is reset and the system is reinitialized.
+ *          objects that have subscribed to it.
+ *
+ * ========================================================================== */
+</documentation>
+      <entry>/* Do nothing */</entry>
+      <state_glyph node="145,16,18,6">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::AdapterConnected}-->
+     <state name="AdapterConnected">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   AdapterConnected state
+ *
+ * \details This state serves as a superstate for all Adapter specific logic. It
+ *          contains event processing common to all adapters, and is not intended
+ *          to be entered as an active state.
+ *
+ * ========================================================================== */</documentation>
+      <entry>Log(DEV, &quot;Handle - Adapter Connected State entered&quot;);</entry>
+      <!--${AOs::Handle::SM::Operate::AdapterConnected::P_KEYPRESS}-->
+      <tran trig="P_KEYPRESS">
+       <action>// Prevent arming of standby/idle timers while adapter attached.</action>
+       <tran_glyph conn="106,83,3,-1,18">
+        <action box="0,-2,12,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::AdapterConnected::EEA_Operate}-->
+      <state name="EEA_Operate">
+       <documentation>// EEA state
+//
+// Control EEA adapter.
+//
+// This is simply a placeholder for the external model. It is never executed.</documentation>
+       <entry brief="See EEA.qm for details"/>
+       <state_glyph node="108,91,30,10">
+        <entry box="1,2,11,4"/>
+       </state_glyph>
+      </state>
+      <!--${AOs::Handle::SM::Operate::AdapterConnected::EGIA_Operate}-->
+      <state name="EGIA_Operate">
+       <documentation>// EGIA state
+//
+// Control EGIA adapter.
+//
+// This is simply a placeholder for the external model. It is never executed.</documentation>
+       <entry brief="See EGIA.qm for details">/* Check if ST_ERR_USED_SHEEL status. If it is SET play TONE_ERR_CAUTION */
+if ( me-&gt;Clamshell.ClamshellEOL )
+{
+    /* Play Caution Tone */
+    Signia_PlayTone(SNDMGR_TONE_CAUTION);
+}
+</entry>
+       <state_glyph node="141,91,29,10">
+        <entry box="1,2,14,5"/>
+       </state_glyph>
+      </state>
+      <state_glyph node="106,75,66,30">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::OnCharger}-->
+     <state name="OnCharger">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Processing when on the charger
+ *
+ * \details This state is entered when a charger is detected. All charger related
+ *          logic is performed here.
+ *
+ * ========================================================================== */
+</documentation>
+      <entry>uint16_t ProcedureCount;
+uint16_t ProcedureLimit;
+uint64_t LastClamshellAddr;
+
+if (!GetSystemStatus(SYSTEM_STATUS_DEEP_SLEEP_ACTIVATED))
+{
+    me-&gt;PrevStateUSB = 0xFF;
+    Log(DBG, &quot;Entered OnCharger State&quot;);
+    SecurityLog(&quot;Charger Connected&quot;);
+
+    AO_TimerDisarm(&amp;me-&gt;IdleTimer);
+    /* The HANDLE shall remain in STANDBY_MODE while the USB port is connected,
+       while the HANDLE is connected to the CHARGER. */
+    AO_TimerDisarm(&amp;me-&gt;Timer);
+    AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+    AO_TimerArm(&amp;me-&gt;IdleModeTimer, CHARGER_IDLEMODE_TIMEOUT, 0);
+    AO_TimerArm(&amp;me-&gt;Timer, BAT_READ_TIMEOUT_ONCHARGER, 0);
+    AO_TimerArm(&amp;me-&gt;SleepTimer,me-&gt;OnChargerTimetoSleep,0);
+
+    DeviceMem_READ(me-&gt;Handle,ProcedureLimit,ProcedureLimit);
+    DeviceMem_READ(me-&gt;Handle,ProcedureCount,ProcedureCount);
+
+    if (GetSystemStatus( SYSTEM_STATUS_PROCEDURE_HAS_FIRED_FLAG))
+    {
+        //check firing flag status. Increment handle procedure count if firing flag set
+        ProcedureCount++;
+        DeviceMem_WRITE(me-&gt;Handle,ProcedureCount,ProcedureCount);
+        ClearNoinitProcedureHasFiredFlag(); //reset firing flag once handle procedure count is incremented
+    }
+
+    if( ProcedureCount &gt;= ProcedureLimit)
+    {
+        Signia_PowerModeSet(POWER_MODE_ACTIVE);
+        FaultHandlerSetFault(HANDLE_EOL_ZEROPROCEDURECOUNT, SET_ERROR);
+    }
+    // Delete the ID of the previously attached CLAMSHELL from HANDLE memory
+    LastClamshellAddr = 0;
+    DeviceMem_WRITE(me-&gt;Handle,LastClamshellAddress,LastClamshellAddr);
+}
+else
+{
+    AO_TimerRearm(&amp;me-&gt;SleepTimer,me-&gt;OnChargerTimetoSleep);
+}
+Signia_BatteryHealthCheck(me-&gt;pChargerInfo);</entry>
+      <!--${AOs::Handle::SM::Operate::OnCharger::CHARGER_IDLEMODE_TIMEOUT}-->
+      <tran trig="CHARGER_IDLEMODE_TIMEOUT">
+       <action>Log(DBG, &quot; Entering Idle Charger Mode &quot;);
+me-&gt;PrevStateUSB = 0xFF;
+AO_TimerDisarm(&amp;me-&gt;Timer);
+AO_TimerDisarm(&amp;me-&gt;IdleModeTimer);
+AO_TimerRearm(&amp;me-&gt;Timer,BAT_READ_TIMEOUT_ONCHARGER);
+Signia_ChargerManagerSleep();</action>
+       <tran_glyph conn="111,17,3,-1,26">
+        <action box="0,-2,25,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::OnCharger::TIMEOUT}-->
+      <tran trig="TIMEOUT">
+       <action>uint8_t UsbCommStatus;
+UsbCommStatus = L4_USBConnectionStatus();
+
+if (me-&gt;PrevStateUSB != UsbCommStatus)
+{
+    if (!UsbCommStatus)
+    {
+        Signia_PowerModeSet(POWER_MODE_STANDBY);
+    }
+    else
+    {
+        Signia_PowerModeSet(POWER_MODE_ACTIVE);
+    }
+    me-&gt;PrevStateUSB = UsbCommStatus;   
+}
+AO_TimerRearm(&amp;me-&gt;Timer, BAT_READ_TIMEOUT_ONCHARGER);</action>
+       <tran_glyph conn="111,19,3,-1,12">
+        <action box="0,-2,10,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::OnCharger::P_OFF_CHARGER}-->
+      <tran trig="P_OFF_CHARGER" target="../../45">
+       <action>uint8_t BatteryLevel;
+Signia_ChargerManagerGetBattRsoc(&amp;BatteryLevel);</action>
+       <tran_glyph conn="111,31,3,1,20,11,-2">
+        <action box="0,-2,15,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::OnCharger::CATCH_ALL}-->
+      <tran trig="CATCH_ALL">
+       <action>// We will only get here if the processor was not put into sleep mode.
+// (PowerModeSet failed)
+
+me-&gt;Handle.HandleComConnected = L4_CommStatusActive();</action>
+       <tran_glyph conn="111,37,3,-1,16">
+        <action box="0,-2,11,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::OnCharger::SLEEP_TIMEOUT}-->
+      <tran trig="SLEEP_TIMEOUT">
+       <action>
+// Set the sleep cause as Charger
+Signia_PowerModeSetSleepCause(SLEEP_CAUSE_CHARGER);</action>
+       <!--${AOs::Handle::SM::Operate::OnCharger::SLEEP_TIMEOUT::[ComDisconnected]}-->
+       <choice target="../../../46">
+        <guard brief="ComDisconnected">!me-&gt;Handle.HandleComConnected</guard>
+        <choice_glyph conn="125,24,5,3,20,4,5">
+         <action box="2,-2,16,2"/>
+        </choice_glyph>
+       </choice>
+       <!--${AOs::Handle::SM::Operate::OnCharger::SLEEP_TIMEOUT::[ComConnected]}-->
+       <choice target="../../5">
+        <guard brief="ComConnected">else</guard>
+        <choice_glyph conn="125,24,4,3,3,7">
+         <action box="-8,3,15,2"/>
+        </choice_glyph>
+       </choice>
+       <tran_glyph conn="111,24,3,-1,14">
+        <action box="0,-3,26,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::OnCharger::WaitForBH}-->
+      <state name="WaitForBH">
+       <documentation>/* ========================================================================== */
+/**
+ * \brief   Wait state for Battery Healthcheck
+ *
+ * \details This state is entered when Sleep timer is elapsed and USB is connected. 
+ *	 As USB communication is Active Handle shall not go to Sleep, hence the Oncharger enters this waitstate for the next Battery health check cycle
+ *
+ * ========================================================================== */
+</documentation>
+       <entry>Log(DEV,&quot;OnCharger: Battery Health wait state, Wait Time = %d sec&quot;, Signia_BatteryHealthGetNextSleepTime()/1000 );
+AO_TimerArm(&amp;me-&gt;WaitforBHTimer, Signia_BatteryHealthGetNextSleepTime(),0);</entry>
+       <!--${AOs::Handle::SM::Operate::OnCharger::WaitForBH::WAIT_FOR_BH_TIMEOUT}-->
+       <tran trig="WAIT_FOR_BH_TIMEOUT" target="../..">
+        <action>/*The timer Handles the Battery Health check intervals in case of COM active*/
+me-&gt;OnChargerTimetoSleep = me-&gt;pChargerInfo-&gt;pBattParam-&gt;MinWakeTimeinms;
+
+Log(DEV, &quot;OnCharger: Battery Health wait Timeout&quot;);
+
+AO_TimerDisarm(&amp;me-&gt;WaitforBHTimer);
+AO_TimerRearm(&amp;me-&gt;SleepTimer,me-&gt;OnChargerTimetoSleep);
+Signia_BatteryHealthCheck(me-&gt;pChargerInfo);</action>
+        <tran_glyph conn="132,33,3,2,3,6">
+         <action box="0,-2,11,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="132,26,11,9">
+        <entry box="1,2,5,2"/>
+       </state_glyph>
+      </state>
+      <state_glyph node="111,9,33,30">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::Reset}-->
+     <state name="Reset">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Power down the handle (ship mode)
+ *
+ * \details Power to the handle is removed. Power may only be restored by
+ *          inserting the handle into the charger. At that point, the processor
+ *          is reset and the system is reinitialized.
+ *          objects that have subscribed to it.
+ *
+ * ========================================================================== */
+</documentation>
+      <entry>Log(DBG, &quot;Entering Handle reset state&quot;);
+
+ClearSystemStatus();
+
+SoftReset();  //reset device</entry>
+      <state_glyph node="111,40,18,6">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <!--${AOs::Handle::SM::Operate::Sleep}-->
+     <state name="Sleep">
+      <documentation>/* ========================================================================== */
+/**
+ * \brief   Invoke sleep mode
+ *
+ * \details Sleep mode stops the CPU clock. It is started when a LLWU (Low Level
+ *          Wake Up) signal is asserted. The code that services the LLWWU signal
+ *          causes the processor to be reset. Execution comes to this state 
+ *          (completes entry processing) only if Signia_PowerModeSet fails and the
+ *          unit does not sleep.
+ *
+ * ========================================================================== */
+</documentation>
+      <entry>// Sleep mode stops the CPU clock.
+// Waking up from sleep mode should happen with the peripheral wake up pin signal.
+// Sleep mode sets the periphral WU pin to wake on any key press or charger connect.
+// A wake will result in a SW reset
+
+Log(DEV, &quot;Entered Sleep mode&quot;);
+Signia_PowerModeSet(POWER_MODE_SLEEP);
+// Control is not returned to this point.</entry>
+      <!--${AOs::Handle::SM::Operate::Sleep::CATCH_ALL}-->
+      <tran trig="CATCH_ALL">
+       <action>// We will only get here if the processor was not put into sleep mode.
+// (PowerModeSet failed)
+
+/// \todo 02/08/2022 DAZ - What do we want to do here? Force reset?</action>
+       <tran_glyph conn="150,32,3,-1,14">
+        <action box="0,-2,11,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Sleep::P_ONCHARGER_WAKEFROMSLEEP}-->
+      <tran trig="P_ONCHARGER_WAKEFROMSLEEP" target="../../44">
+       <action>me-&gt;OnChargerTimetoSleep = me-&gt;pChargerInfo-&gt;pBattParam-&gt;MinWakeTimeinms;</action>
+       <tran_glyph conn="150,35,3,1,-6">
+        <action box="0,-2,29,2"/>
+       </tran_glyph>
+      </tran>
+      <!--${AOs::Handle::SM::Operate::Sleep::P_OFF_CHARGER}-->
+      <tran trig="P_OFF_CHARGER" target="../../45">
+       <action>Log(DBG, &quot;Exiting on OnCharger State&quot;);
+SecurityLog(&quot;Charger Disconnected&quot;);
+
+AO_TimerDisarm(&amp;me-&gt;SleepTimer);
+ClearSystemStatus();
+</action>
+       <tran_glyph conn="150,39,3,1,19,4,-40">
+        <action box="0,-2,15,2"/>
+       </tran_glyph>
+      </tran>
+      <state_glyph node="150,24,27,16">
+       <entry box="1,2,6,2"/>
+      </state_glyph>
+     </state>
+     <state_glyph node="4,5,189,141"/>
+    </state>
+    <state_diagram size="196,146"/>
+   </statechart>
+  </class>
+  <!--${AOs::HandleCtor}-->
+  <operation name="HandleCtor" type="void" visibility="0x00" properties="0x00">
+   <documentation>/* ========================================================================== */
+/**
+ * \brief   Constructor for the Handle Active Object
+ *
+ * \details Establishes the Active Object (AO) and executes the initial transition
+ *          and state entry code. Other AO specific objects, such as timers, may
+ *          be initialized here (AO_TimerCtor()).
+ * \n \n
+ *          The Handle &quot;constructor&quot; is provided outside of the Handle class so that it 
+ *          can be used independently from the class. This is part of the &quot;opaque pointer&quot;
+ *          design idiom.
+ * \n \n
+ *          Establishing the AO encompasses the following activities:
+ *              - Initialize and register the task control block with Micrium.
+ *                  - Set the stack
+ *                  - Set the priority
+ *                  - Set the name
+ *              - Initialize and register the active object control block with QP/C.
+ *                  - Set the event queue
+ *                  - Pass user defined initialization parameters
+ *
+ * \note    The initial transition and state entry code (the 1st time) are executed
+ *          in the calling task's context so care must be taken to consider the calling
+ *          task's stack constraints and task dependent defaults, if any, when writing
+ *          that code. This is usually not a problem, but when using certain features of
+ *          Micrium (such as the file system), Micrium keeps certain configuration information
+ *          in the task control block.
+ *
+ * \param   &lt; None &gt;
+ *
+ * \return  None
+ *
+ * ========================================================================== */
+</documentation>
+   <code>Handle *me = &amp;LocalHandle;
+
+AO_TimerCtor(&amp;me-&gt;ReloadSwitchTimer, AO_Handle, SWITCH_STATE_TIMEOUT_SIG); // Create timer
+AO_TimerCtor(&amp;me-&gt;Timer, AO_Handle, TIMEOUT_SIG);              // Create timer
+AO_TimerCtor(&amp;me-&gt;IdleTimer, AO_Handle, IDLE_TIMEOUT_SIG);     // Create Idle timer
+AO_TimerCtor(&amp;me-&gt;SleepTimer, AO_Handle, SLEEP_TIMEOUT_SIG);   // Create Sleep timer
+AO_TimerCtor(&amp;me-&gt;FaultTimer, AO_Handle, FAULT_TIMEOUT_SIG);   // Create Fault Timer
+AO_TimerCtor(&amp;me-&gt;BatteryLowTimer, AO_Handle, BATTERY_LOW_TIMEOUT_SIG); // Create Battery Low Timer
+AO_TimerCtor(&amp;me-&gt;IdleModeTimer, AO_Handle, CHARGER_IDLEMODE_TIMEOUT_SIG);   // Create charger IDLE MODE timer
+AO_TimerCtor(&amp;me-&gt;MotorIdleTimer, AO_Handle, MOTOR_IDLE_TIMEOUT_SIG);
+AO_TimerCtor(&amp;me-&gt;CountDownScreenTimer, AO_Handle, COUNTDOWN_SCREEN_TIMEOUT_SIG);   // Create CountDown Screen timer
+AO_TimerCtor(&amp;me-&gt;RotationConfigScreenTimer, AO_Handle, ROTATION_CONFIG_SCREEN_TIMEOUT_SIG);   // Create Rotation Config Screen timer
+AO_TimerCtor(&amp;me-&gt;RotationConfigTimer, AO_Handle, P_ROTATION_CONFIG_COMPLETED_SIG);   // Create Rotation Config Screen timer
+AO_TimerCtor(&amp;me-&gt;RetryFireCountUpdateTimer, AO_Handle, RETRY_FIRE_COUNT_UPDATE_TIMEOUT_SIG);    // Create timer for Update Handle Fire Count
+AO_TimerCtor(&amp;me-&gt;FiringTimer, AO_Handle, FIREMODE_TIMEOUT_SIG); // Create timer for firing progression update on reload recognition bar
+AO_TimerCtor(&amp;me-&gt;ClamshellOWShortTimer, AO_Handle, CLAMSHELL_1WSHORT_TIMEOUT_SIG); // Create timer
+AO_TimerCtor(&amp;me-&gt;WaitforBHTimer, AO_Handle, WAIT_FOR_BH_TIMEOUT_SIG); // Create timer for Battery Health Check wait in case of Active COM
+AO_TimerCtor(&amp;me-&gt;AdapterCheckTimer,AO_Handle,ADAPTER_TYPE_CHECK_TIMEOUT_SIG);
+
+AO_Start(AO_Handle,                             // Pointer to QActive object (AO)
+         Q_STATE_CAST(&amp;Handle_initial),     // Pointer to initial transition
+         TASK_PRIORITY_HANDLE,               // Task priority
+         HandleEventQueue,                      // Pointer to event queue
+         HANDLE_EVQ_SIZE,                       // Size of event queue (in entries) This could be Q_DIM(HandleEventQueue)
+         HandleStack,                           // Pointer to stack (bottom)
+         HANDLE_STACK_SIZE,                     // Stack size This could be Q_DIM(HandleStack)
+         NULL,                                  // Pointer to object specific initialization parameters
+         AOname);                               // Pointer to name of active object
+
+/* DeferQueue Initialization */
+AO_QueueInit(&amp;me-&gt;DeferQueue, HandleDeferQueue, HANDLE_DEFER_EVQ_SIZE);
+
+/**
+ * \}   &lt;if using addtogroup above&gt;
+ */
+</code>
+  </operation>
+ </package>
+ <!--${.}-->
+ <directory name=".">
+  <!--${.::Handle.c}-->
+  <file name="Handle.c" properties="external"/>
+  <!--${.::Handle.h}-->
+  <file name="Handle.h" properties="external"/>
+ </directory>
+</model>
