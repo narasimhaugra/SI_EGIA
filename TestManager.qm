@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="5.1.0" links="0">
+ <framework name="qpc"/>
+ <package name="AOs" stereotype="0x02">
+  <class name="TestManager" superclass="qpc::QActive">
+   <attribute name="TMTimer" type="QTimeEvt" visibility="0x00" properties="0x00">
+    <documentation>/// Timer Object</documentation>
+   </attribute>
+   <attribute name="TMKeyHoldTmr" type="QTimeEvt" visibility="0x00" properties="0x00">
+    <documentation>//Timer to hold key time</documentation>
+   </attribute>
+   <statechart properties="0x01">
+    <initial target="../1">
+     <action>QEVENT_TEST_MSG *pTestEvt;
+GetTestManagerNoinitData(&amp;TM_NoinitData);
+if (TM_ONSTARTUP == TM_NoinitData.TM_OnStarup){
+    pTestEvt = AO_EvtNew(REQ_TEST_SIG , sizeof(QEVENT_TEST_MSG));
+    pTestEvt-&gt;size = sizeof(TM_NoinitData.Testdata);
+    pTestEvt-&gt;RxKey = TM_NoinitData.Key;
+    pTestEvt-&gt;TestID = TM_NoinitData.TestID;
+    memcpy (pTestEvt-&gt;Data, &amp;TM_NoinitData.Testdata, pTestEvt-&gt;size);
+    AO_Post(AO_TestManager,&amp;pTestEvt-&gt;Event,NULL);
+    Log(TST, &quot;TestManager: TestMode request on startup&quot;);
+}
+</action>
+     <initial_glyph conn="26,4,5,0,7,6">
+      <action box="0,-2,10,2"/>
+     </initial_glyph>
+    </initial>
+    <state name="Idle">
+     <documentation>/* ========================================================================== */
+/**
+ * \brief   This is the startup state for the TestManager Active Object
+ *
+ * \details This state TaskManager waits for REQ_TEST event
+ *   Upon receiving the event authentication is performed to check if the tester is valid.
+ *    If the Authentication is passed then the TestMode is activated and state is transitioned to Active
+ *
+ * \param   me - Pointer to local data store
+ * \param   e  - Pointer to present event
+ *
+ * \return  State transition status: Q_HANDLED(), Q_UNHANDLED(), Q_TRAN(), Q_SUPER()
+ *
+ * ========================================================================== */</documentation>
+     <tran trig="REQ_TEST">
+      <action>QEVENT_TEST_MSG *pInfo = (QEVENT_TEST_MSG *)e;
+TM_TestID = pInfo-&gt;TestID;</action>
+      <choice target="../../../2">
+       <guard brief="AuthenticationPass">(pInfo-&gt;RxKey == TM_CalculateKey()) || (TM_ONSTARTUP == TM_NoinitData.TM_OnStarup)</guard>
+       <action>/* Authentication pass indicating connection to a valid tester */
+memcpy(&amp;TM_TestData,pInfo-&gt;Data,pInfo-&gt;size);
+
+
+/// \todo 05/26/2022 BS: Send Response packet
+Log(TST, &quot;TestManager: TestMode activated&quot;);</action>
+       <choice_glyph conn="32,16,5,1,21,12,-4">
+        <action box="1,-2,16,2"/>
+       </choice_glyph>
+      </choice>
+      <choice>
+       <guard brief="AuthenticatonFail">else</guard>
+       <action>/* Recieved key did not match the calculated key*/
+</action>
+       <choice_glyph conn="32,16,4,-1,4,16">
+        <action box="1,1,16,2"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="20,16,3,-1,12">
+       <action box="0,-2,9,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="20,10,29,14"/>
+    </state>
+    <state name="Active">
+     <documentation>/* ========================================================================== */
+/**
+ * \brief   This is the running state for the TestManager Active Object
+ *
+ * \details The TestManager object handles the execution 
+ *    of requested test
+ *    The TestMode is exited after a timeout by performing a Soft Reset
+ *
+ * \param   me - Pointer to local data store
+ * \param   e  - Pointer to present event
+ *
+ * \return  State transition status: Q_HANDLED(), Q_UNHANDLED(), Q_TRAN(), Q_SUPER()
+ *
+ * ========================================================================== */
+</documentation>
+     <entry>/* Start Test mode timeout timer */
+AO_TimerArm(&amp;me-&gt;TMTimer, TM_TIMEOUT_TIME_MS, 0);
+TestModeActive = true;
+SetSystemStatus(SYSTEM_STATUS_TESTMODE);
+
+TM_Hook(HOOK_TM, NULL);
+if(TC_KEYSIMULATION == TM_TestID )
+{
+    AO_TimerArm(&amp;me-&gt;TMKeyHoldTmr, TM_TestData.KEYDATA.KeySeqDelay, TM_TestData.KEYDATA.KeySeqDelay);
+}
+else if(TC_MEMORY_FALUT_FLASH_INEGRITY == TM_TestID )
+{
+    AO_TimerRearm(&amp;me-&gt;TMTimer, TM_TIMEOUT_FLASH_INTEGRITY_CHECK);
+}</entry>
+     <tran trig="TM_TIMEOUT">
+      <action>/* Test Mode time out, perform a soft reset */
+Log(TST, &quot;TestManager: TestMode Timeout, performing soft reset&quot;);
+TestModeActive = false;
+ClearSystemStatus();
+OSTimeDly(MSEC_50); // delay to ensure logging happens
+SoftReset();</action>
+      <tran_glyph conn="20,32,3,-1,15">
+       <action box="0,-2,13,2"/>
+      </tran_glyph>
+     </tran>
+     <tran trig="REQ_TEST">
+      <action>QEVENT_TEST_MSG *pInfo = (QEVENT_TEST_MSG *)e;
+</action>
+      <choice target="../..">
+       <guard brief="AuthenticationPass">((TM_TestID == pInfo-&gt;TestID) &amp;&amp; (pInfo-&gt;RxKey == TM_CalculateKey()))</guard>
+       <action>/* Authentication pass indicating connection to a valid tester */
+memcpy(&amp;TM_TestData,pInfo-&gt;Data,pInfo-&gt;size);
+AO_TimerDisarm(&amp;me-&gt;TMTimer);
+AO_TimerDisarm(&amp;me-&gt;TMKeyHoldTmr);
+/// \todo 05/26/2022 BS: Send Response packet
+Log(TST, &quot;TestManager: Subsequent test command accepted&quot;);</action>
+       <choice_glyph conn="32,35,5,1,21,-3,-4">
+        <action box="1,-2,16,2"/>
+       </choice_glyph>
+      </choice>
+      <choice>
+       <guard brief="AuthenticatonFail">else</guard>
+       <action>/* Received key did not match the calculated key or 
+TestID is different from the TestID in ongoing Test sesssion*/
+Log(TST, &quot;TestManager: subsequent test commands not accepted&quot;);</action>
+       <choice_glyph conn="32,35,4,-1,4,16">
+        <action box="1,1,16,2"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="20,35,3,-1,12">
+       <action box="0,-2,9,2"/>
+      </tran_glyph>
+     </tran>
+     <tran trig="TM_KEYTIMEOUT">
+      <action>SeqCount++;
+if(SeqCount &gt;= TM_TestData.KEYDATA.KeySeqCount)
+{
+    SeqCount = TM_TestData.KEYDATA.KeySeqCount-1;
+    AO_TimerDisarm(&amp;me-&gt;TMKeyHoldTmr);
+    KeySimEnd = true;
+}
+WakeupPinCallback = L2_GpioGetPinConfig(GPIO_uP_PORT_C,GPIO_PIN_03);
+if(WakeupPinCallback != NULL)
+{
+    WakeupPinCallback();
+}</action>
+      <tran_glyph conn="20,42,3,-1,15">
+       <action box="0,-2,15,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="20,26,29,20">
+      <entry box="1,2,6,2"/>
+     </state_glyph>
+    </state>
+    <state_diagram size="80,50"/>
+   </statechart>
+  </class>
+  <operation name="TestManagerCtor" type="void" visibility="0x00" properties="0x00">
+   <code>TestManager *me = (TestManager *)AO_TestManager;
+
+AO_TimerCtor(&amp;me-&gt;TMTimer, &amp;me-&gt;super, TM_TIMEOUT_SIG);  // Build timer
+AO_TimerCtor(&amp;me-&gt;TMKeyHoldTmr, &amp;me-&gt;super, TM_KEYTIMEOUT_SIG);  // Build timer
+
+AO_Start(AO_TestManager,                             // Pointer to QActive object (AO)
+         Q_STATE_CAST(&amp;TestManager_initial),         // Pointer to initial transition
+         TASK_PRIORITY_TM,                  // Task priority
+         TMEventQueue,                      // Pointer to event queue
+         TM_EVQ_SIZE,                       // Size of event queue (in entries) This could be Q_DIM(MotorDevStubs_queueSto
+         TMStack,                           // Pointer to stack (bottom)
+         TM_STACK_SIZE,                     // Stack size This could be Q_TIM(MotorDevStubs
+         NULL,                                  // Pointer to object specific initialization parameters
+         AOname);                               // Pointer to name of active object</code>
+  </operation>
+ </package>
+ <directory name=".">
+  <file name="TestManager.c" properties="external"/>
+  <file name="TestManager.h" properties="external"/>
+ </directory>
+</model>
