@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="5.1.0" links="0">
+ <framework name="qpc"/>
+ <package name="AOs" stereotype="0x02">
+  <class name="SoundManager" superclass="qpc::QActive">
+   <statechart properties="0x01">
+    <documentation>/* ========================================================================== */
+/**
+ * \brief   Initial transition
+ *
+ * \details This function is called as part of the Active Object construction process.
+ *          (SoundMgrCtor()). It runs in the startup task's context, using its stack and
+ *          TCB.
+ *
+ *          One time initializations are typically performed here, such as local data values
+ *          and subscription to events. (Unsubscribing and then re-subscribing to events is rare)
+ *
+ *          Timer structures may be initialized here via AO_TimerCtor(), but they are typically
+ *          initialized in the constructor (SoundMgrCtor()) function.
+ *
+ *          The par parameter points to a user defined parameter block for initialization purposes.
+ *          This is typically not used. (Set to NULL)
+ *
+ * \param   me - Pointer to AO's local data structure. (This includes the AO descriptor)
+ * \param   par - Pointer to user defined parameter block
+ *
+ * \return  State status
+ *
+ * ========================================================================== */
+</documentation>
+    <initial target="../1">
+     <action brief="Startup"/>
+     <initial_glyph conn="41,4,5,0,11,4">
+      <action box="0,-2,9,2"/>
+     </initial_glyph>
+    </initial>
+    <state name="Run">
+     <tran trig="PLAY_TONE">
+      <action>L3_TonePlay((Tone *)&amp;ToneList[((QEVENT_TONE *)e)-&gt;ToneId]);</action>
+      <tran_glyph conn="42,16,3,-1,16">
+       <action box="0,-2,10,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="42,8,20,10"/>
+    </state>
+    <state_diagram size="130,82"/>
+   </statechart>
+  </class>
+  <operation name="L4_SoundManagerCtor" type="void" visibility="0x00" properties="0x00">
+   <documentation>/* ========================================================================== */
+/**
+ * \brief   Constructor for the SoundMgr Active Object
+ *
+ * \details Establishes the Active Object (AO) and executes the initial transition
+ *          and state entry code. Other AO specific objects, such as timers, may
+ *          be initialized here via AO_TimerCtor().
+ * \n \n
+ *          The SoundMgr &quot;constructor&quot; is provided outside of the SoundMgr class so that it 
+ *          can be used independently from the class. This is part of the &quot;opaque pointer&quot;
+ *          design idiom.
+ * \n \n
+ *          Establishing the AO encompasses the following activities:
+ *              - Initialize and register the task control block with Micrium.
+ *                  - Set the stack
+ *                  - Set the priority
+ *                  - Set the name
+ *              - Initialize and register the active object control block with QP/C.
+ *                  - Set the event queue
+ *                  - Pass user defined initialization parameters
+ *
+ * \note    The initial transition and state entry code (the 1st time) are executed
+ *          in the calling task's context so care must be taken to consider the calling
+ *          task's stack constraints and task dependent defaults, if any, when writing
+ *          that code. This is usually not a problem, but when using certain features of
+ *          Micrium (such as the file system), Micrium keeps certain configuration information
+ *          in the task control block.
+ *
+ * \param   &lt; None &gt;
+ *
+ * \return  None
+ *
+ * ========================================================================== */
+</documentation>
+   <code>AO_Start(AO_SoundMgr,                           // Pointer to QActive object (AO)
+         Q_STATE_CAST(&amp;SoundManager_initial),   // Pointer to initial transition
+         TASK_PRIORITY_L4_SOUNDMGR,             // Task priority
+         SoundMgrEventQueue,                    // Pointer to event queue
+         SOUNDMGR_EVQ_SIZE,                     // Size of event queue (in entries)
+         SoundMgrStack,                         // Pointer to stack (bottom)
+         SOUNDMGR_STACK_SIZE,                   // Stack size (in longwords)
+         NULL,                                  // Pointer to object specific initialization parameters
+         AOname);                               // Pointer to name of active object</code>
+  </operation>
+ </package>
+ <directory name=".">
+  <file name="Signia_SoundManager.c" properties="external"/>
+  <file name="Signia_SoundManager.h" properties="external"/>
+ </directory>
+</model>
